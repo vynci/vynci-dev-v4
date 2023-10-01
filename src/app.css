@@ -20,4 +20,8 @@
   hr {
     @apply border-zinc-100 dark:border-zinc-700/25;
   }
+
+  img {
+    border-radius: 0 !important;
+  }
 }

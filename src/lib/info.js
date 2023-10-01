@@ -3,19 +3,16 @@
 // feel free to remove this file.
 
 // URL of your website
-export const website = 'https://sveltekit-blog-template.vercel.app'
+export const website = 'https://vynci.dev'
 
 export const firstName = 'Vince'
 export const lastName = 'Elizaga'
 export const name = `${firstName} ${lastName}`
 
 // Used for the landing page & footer of posts
-export const avatar = 'https://picsum.photos/id/203/250/250'
+export const avatar = ''
 export const bio = `\
-I’m ${firstName}, a software engineer based in Canada. Lorem ipsum dolor sit amet, consectetur
-adipiscing elit. Phasellus accumsan quam at eros malesuada, id luctus lectus efficitur. Nulla
-sit amet arcu mi. Duis quis mauris malesuada, posuere orci et, pulvinar nisl. Nam malesuada
-vehicula sapien vitae sagittis.
+I’m ${firstName}, a software engineer based in Canada.
 `
 
 // Your social usernames, empty strings won't be used.
@@ -23,5 +20,7 @@ vehicula sapien vitae sagittis.
 // but you can replace with just your username.
 export const github = 'vynci'
 export const twitter = ''
-export const linkedin = ''
+export const linkedin = 'in/vynci'
 export const instagram = ''
+export const email = 'hello@vynci.dev'
+export const devto = ''

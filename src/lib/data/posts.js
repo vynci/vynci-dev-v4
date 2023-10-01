@@ -1,7 +1,7 @@
 import { browser } from '$app/environment'
 import { format } from 'date-fns'
 import { parse } from 'node-html-parser'
-import readingTime from 'reading-time/lib/reading-time'
+import readingTime from 'reading-time/lib/reading-time.js'
 
 // we require some server-side APIs to parse all metadata
 if (browser) {
@@ -55,7 +55,7 @@ export const posts = Object.entries(import.meta.glob('/posts/**/*.md', { eager: 
     previous: allPosts[index + 1]
   }))
 
-function addTimezoneOffset(date) {
-  const offsetInMilliseconds = new Date().getTimezoneOffset() * 60 * 1000
-  return new Date(new Date(date).getTime() + offsetInMilliseconds)
-}
+  function addTimezoneOffset(date) {
+    const offsetInMilliseconds = new Date().getTimezoneOffset() * 60 * 1000
+    return new Date(new Date(date).getTime() + offsetInMilliseconds)
+  }
