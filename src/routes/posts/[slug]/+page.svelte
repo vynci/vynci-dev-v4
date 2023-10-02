@@ -80,6 +80,24 @@
         >
           {data.post.title}
         </h1>
+        <a style="width: 175px;" href="/about">
+          <div class="flex mt-8">
+            <img
+              class="w-11 h-11 mr-4"
+              style="border-radius: 50% !important;"
+              src="https://avatars.githubusercontent.com/u/5421780?v=4"
+            />
+            <div class="grid text-sm leading-4 pt-1">
+              <span class="font-medium text-zinc-500 dark:text-zinc-400"
+                >{data.post.authorName}</span
+              >
+              <span class="text-zinc-400 dark:text-zinc-500">{data.post.authorPosition}</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- on:click={goto('/about')} -->
+
         <PostDate class="text-sm sm:text-base" post={data.post} decorate collapsed />
       </header>
 

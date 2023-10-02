@@ -8,7 +8,7 @@
 </script>
 
 <svelte:head>
-  <title>{`vynci (${name})`}</title>
+  <title>{`Home | ${name} (vynci)`}</title>
   <meta name="description" content={bio} />
 </svelte:head>
 

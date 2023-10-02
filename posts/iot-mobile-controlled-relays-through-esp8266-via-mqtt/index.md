@@ -1,6 +1,8 @@
 ---
 title: 'IoT: Mobile App Controlled Relays using ESP8266 via MQTT+HTTP'
 date: '2017-11-17'
+authorName: 'Vince Elizaga'
+authorPosition: 'Admin'
 ---
 
 ## Overview

@@ -1,6 +1,8 @@
 ---
 title: 'Serverless: File Uploader using AWS S3, API Gateway and Lambda'
 date: '2022-10-7'
+authorName: 'Vince Elizaga'
+authorPosition: 'Admin'
 ---
 
 ## Overview

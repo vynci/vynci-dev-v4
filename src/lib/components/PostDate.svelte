@@ -1,12 +1,12 @@
 <script>
-  import { format, parseISO } from 'date-fns'
+  import { format, parseISO } from 'date-fns';
 
-  export let decorate
-  export let post
-  export let collapsed = false
+  export let decorate;
+  export let post;
+  export let collapsed = false;
 
-  let _class
-  export { _class as class }
+  let _class;
+  export { _class as class };
 </script>
 
 <div

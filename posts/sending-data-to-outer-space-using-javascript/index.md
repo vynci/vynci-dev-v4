@@ -1,6 +1,8 @@
 ---
 title: 'IoT: Sending data to outer space using JavaScript'
 date: '2022-10-22'
+authorName: 'Vince Elizaga'
+authorPosition: 'Admin'
 ---
 
 ## Overview

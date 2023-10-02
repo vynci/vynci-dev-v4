@@ -1,6 +1,8 @@
 ---
 title: 'Serverless: REST API with AWS Lambda + DynamoDB'
 date: 2022-03-09
+authorName: 'Vince Elizaga'
+authorPosition: 'Admin'
 ---
 
 ## Overview
