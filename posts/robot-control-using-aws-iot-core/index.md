@@ -1,6 +1,6 @@
 ---
 title: 'Rovy Part 1: Control motors remotely using AWS IoT Core (MQTT)'
-date: '2023-9-7'
+date: '2023-10-7'
 authorName: 'Vince Elizaga'
 authorPosition: 'Admin'
 ---
@@ -11,7 +11,7 @@ This is the first part of the project which focuses on controlling the motors on
 
 ![Overview](./rovy_p1_overview.mp4)
 
-If you want to dive right away into the code, you check it out here:
+If you want to dive right away into the code, you can check it out here:
 
 - [Rover Hardware](https://github.com/vynci/rovy-hardware/tree/rovy-part-1) (branch -> `rovy-part-1`)
 - [Mobile app](https://github.com/vynci/rovy-mobile/tree/rovy-part-1) (branch -> `rovy-part-1`)
@@ -383,4 +383,4 @@ In this article, we have covered on how we can build a rover and control it over
 
 ![Summary](./rovy_p1_conclusion.mp4)
 
-The next step would be to integrate a video stream into the rover, which will enable us to have a vision of the rover's perspective. I hope you enjoy reading this, and stay tuned for the upcoming updates of this project. Thank you!
+The next step would be to integrate a video stream into the rover, which will enable us to have a visual of the rover's point of view. I hope you enjoy reading this, and stay tuned for the upcoming updates of this project. Thank you!
