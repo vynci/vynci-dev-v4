@@ -14,7 +14,9 @@
 
 <div class="flex flex-col flex-grow gap-8 pb-2 mt-6">
   <section class="w-full">
-    <div class="flex items-center justify-between gap-4 mb-8 border-b border-zinc-100 pb-6">
+    <div
+      class="flex items-center justify-between gap-4 mb-8 border-b border-zinc-100 dark:border-zinc-700 pb-6"
+    >
       <h2 class="text-sm font-medium sm:text-base text-zinc-500 dark:text-zinc-400">
         Random Ideas.
       </h2>

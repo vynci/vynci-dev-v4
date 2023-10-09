@@ -14,7 +14,7 @@ This is the first part of the project which focuses on controlling the motors on
 If you want to dive right away into the code, you can check it out here:
 
 - [Rover Hardware](https://github.com/vynci/rovy-hardware/tree/rovy-part-1) (branch -> `rovy-part-1`)
-- [Mobile app](https://github.com/vynci/rovy-mobile/tree/rovy-part-1) (branch -> `rovy-part-1`)
+- [Mobile App](https://github.com/vynci/rovy-mobile/tree/rovy-part-1) (branch -> `rovy-part-1`)
 
 > I will be pushing updates to the repositories as I add more things (i.e video stream) into the rover as I progress in the future, so the main branch might look different by the time you are reading this. As for this article, please refer to the specified branch.
 
@@ -58,17 +58,17 @@ I used a Lithium-ion battery pack as it is lightweight, can handle inductive loa
 
 ![Hardware](./hardware_psu.jpg)
 
-## Software
+## Software (Motor controls)
 
-We'll now be switching into the software side of things. If you want to skip directly into the source code, you can check it out [here](https://github.com/vynci/rovy-hardware/tree/motor-control-react-joystick)
+We'll now be switching into the software side of things. If you want to skip directly into the source code, you can check it out [here](https://github.com/vynci/rovy-hardware/tree/rovy-part-1)
 
-### Send serial data using Nodejs (serial-port)
+### Send serial data using Nodejs (serialport)
 
 The Sabertooth Motor driver can be controlled using PWM or serial (UART TTL). We'll be using serial control as the PWM output for the Raspberry Pi is limited. The serial output from the Sabertooth will be connected to the RPi’s GPIO 14 (TXD).
 
 I'm using [Nodejs](https://nodejs.org/en/about) as the runtime environment and the NPM module [serialport](https://www.npmjs.com/package/serialport) to interface with the Motor Driver.
 
-Assuming you already have Nodejs installed on your system. First we'll do an npm install for the library **serialport**.
+Assuming you already have Nodejs installed on your system. We'll now do an npm install for the library **serialport**.
 
 ```shell
 $ npm install serialport
@@ -126,11 +126,11 @@ So if we want the `Motors A` to be in full forward we send `127`, if 50% speed f
 
 ![Hardware](./rovy_p1_steering.png)
 
-Now this differential in speed will allow us to steer the robot into our desired direction, this is also called [Skid Steering](https://www.mdpi.com/2076-3417/12/10/5171)
+Now this differential in speed will allow us to steer the robot into our desired direction, this is called [Differential Steering](https://en.wikipedia.org/wiki/Differential_steering)
 
 ## Remote control via MQTT
 
-Now that we can control the motors with serial using Nodejs. The next thing we can do is connect our current software to the cloud, that way we can remotely control our robot via the internet. And we will be using MQTT as the protocol for our communication.
+Now that we can control the motors with serial using Nodejs. The next thing we need do is connect our current software to the cloud, that way we can remotely control our robot via the internet. And we will be using MQTT as the protocol for our communication.
 
 MQTT is a standard messaging protocol for the Internet of Things (IoT). It is designed as an extremely lightweight publish/subscribe messaging transport that is ideal for connecting remote devices with a small code footprint and minimal network bandwidth. You can read more about it [here](https://mqtt.org/).
 
@@ -165,6 +165,14 @@ Save it to our creds folder and rename it as:
 2. Private key -> `private.key`
 
 3. Amazon Root CA 1 -> `ca.pem`
+
+Last thing we need from AWS console is to grab the MQTT endpoint that we'll need to connect into later. Under AWS IoT, go to `Test`, then click on the `MQTT test client`.
+
+![AWS IoT Core](./aws_get_endpoint.png)
+
+You can also use this as a testing tool to publish/subscribe messages into topics.
+
+### Connectivity
 
 Adding in the connection to AWS IoT Core in our project is easy and straightforward. First, we need to install an mqtt client [library](https://github.com/mqttjs/MQTT.js).
 
@@ -376,6 +384,8 @@ This will run a web serve instance (live reload) that you can test and develop w
 Building into iOS or Android is really easy with Ionic, as they have a platform that can do all the heavy lifting for you. Using [Ionic Appflow](https://ionic.io/appflow), you won't need to setup your local environment with like Android Studio or Xcode.
 
 You can checkout their [documentation](https://ionic.io/docs/appflow/tutorial) to link your git repository and do the whole CI/CD workflow from there.
+
+If you want to build on your local machine for iOS, you can check their step-by-step documentation [here](https://capacitorjs.com/docs/ios). For android, you can check it out [here](https://capacitorjs.com/docs/android)
 
 ## Summary
 
