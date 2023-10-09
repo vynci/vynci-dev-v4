@@ -47,8 +47,8 @@
 
     <div class="mb-8">
       <p>
-        A maker that tinkers between software and hardware engineering. I'm currently based in
-        Toronto Canada, and recently immersed with cloud systems architecture, serverless computing,
+        A maker that tinkers between software and hardware engineering. Currently based in Toronto
+        Canada, and recently immersed with cloud systems architecture, serverless computing,
         web-mobile applications, and IoT development.
       </p>
     </div>
