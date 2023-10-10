@@ -54,7 +54,7 @@ On this project, I’m using a [Raspberry Pi 4](https://www.raspberrypi.com/prod
 
 ### Power supply
 
-I used a Lithium-ion battery pack as it is lightweight, can handle inductive loads, and fast to charge. I got this battery bank module (72W 100WH) from [Amazon](https://amazon.ca/dp/B01337QXMA?psc=1&ref=ppx_yo2ov_dt_b_product_details) that already has a 5V and 12V output, in which I did some few modifications that would enable me to extend the on/off switch outside the enclosure.
+I used a Lithium-ion battery pack as it is lightweight, can handle inductive loads, and fast to charge. I got this battery bank module (72W 100WH) from [Amazon](https://amazon.ca/dp/B01337QXMA?psc=1&ref=ppx_yo2ov_dt_b_product_details) that already has a 5V/2A and 12V/6A output, in which I did some few modifications that would enable me to extend the on/off switch outside the enclosure.
 
 ![Hardware](./hardware_psu.jpg)
 
@@ -377,7 +377,7 @@ $ ionic serve
 
 ![Testing the Ionic App](./ionic_serve.png)
 
-This will run a web serve instance (live reload) that you can test and develop with.
+This will run a web server instance (live reload) that you can test and develop with.
 
 ### Building into iOS or Android
 

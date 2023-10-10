@@ -61,7 +61,7 @@
       <div class="mt-8">
         <p>
           I'm always open to new ideas and opportunities. Whether you have a question or just want
-          to say hi. I’ll try my best to get back to you!
+          to say hi.
         </p>
 
         <p class="mt-4">Here are some endpoints that could help us get connected:</p>

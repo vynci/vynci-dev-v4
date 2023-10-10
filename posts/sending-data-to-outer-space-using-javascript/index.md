@@ -21,7 +21,7 @@ With a good view of the sky, it is possible to send/receive approximately once e
 
 In this quick demonstration, We want to interface with an Iridium 9602/3 modem via serial port. There are a lot of Iridium service providers such as Metocean and GroundControl. In this demo, we will be using the RockBlock modem from the company called GroundControl, and use an Arduino to temporarily buffer the data to a laptop (via USB). Our code in javascript will be able to send and receive satellite messages.
 
-If you are in a hurry, you can skip directly into the source code, you can check it out here.
+If you are in a hurry, you can skip directly into the source code, you can check it out [here](https://github.com/vynci/node-iridium-satellite).
 
 ## Fundamentals
 
