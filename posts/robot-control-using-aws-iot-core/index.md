@@ -18,6 +18,12 @@ If you want to dive right away into the code, you can check it out here:
 
 > I will be pushing updates to the repositories as I add more things (i.e video stream) into the rover as I progress in the future, so the main branch might look different by the time you are reading this. As for this article, please refer to the specified branch.
 
+## Architecture
+
+This diagram illustrates the high level view of the system's workflow on motor control.
+
+![Architecture](./architecture_p1.jpg)
+
 ## Hardware
 
 The hardware comprises three main parts, which are the Chassis, Motor Driver, Control Board (Raspberry Pi), and Power supply.
