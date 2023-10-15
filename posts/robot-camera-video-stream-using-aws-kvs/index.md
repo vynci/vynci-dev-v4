@@ -7,7 +7,7 @@ authorPosition: 'Admin'
 
 ## Overview
 
-This is the second part of the project that tackles on sending a video stream from the rover's onboard camera through AWS Kinesis Video Stream (KVS) using the WebRTC communication protocol.
+This is the second part of the project that tackles on sending a peer-to-peer video stream from the rover's onboard camera into our frontend mobile application using WebRTC and AWS Kinesis Video Stream (KVS) as the Signaling Server.
 
 ![Overview](./overview_lq.mp4)
 
@@ -26,7 +26,7 @@ If you want to dive right away into the code for this article, you can check it 
 
 ## Architecture
 
-The diagram below illustrates the high-level view of the system’s workflow on streaming video from the rover's camera to the mobile application via WebRTC. This article leans heavily into WebRTC, I suggest you go through the [fundamentals](https://webrtc.org/) first to get an overview of the peer-to-peer concept.
+The diagram below illustrates the high-level view of the system’s workflow on streaming video from the rover's camera to the mobile application via WebRTC. This article leans a lot into WebRTC, you can go through the [fundamentals](https://webrtc.org/) to get an overview of the peer-to-peer concept.
 
 ![Hardware](./architecture_p2.jpg)
 
@@ -44,7 +44,7 @@ We simply connect our Camera directly into the Raspberry Pi through the [Camera 
 
 ### Camera
 
-The camera that we will be using is the $15 [Raspberry Pi Camera Module 2](https://www.raspberrypi.com/products/camera-module-v2/). The v2 Camera Module has a Sony IMX219 8-megapixel sensor (compared to the 5-megapixel OmniVision OV5647 sensor of the original camera).
+The camera that we will be using is the [Raspberry Pi Camera Module 2](https://www.raspberrypi.com/products/camera-module-v2/). The v2 Camera Module has a Sony IMX219 8-megapixel sensor (compared to the 5-megapixel OmniVision OV5647 sensor of the original camera).
 
 ![Hardware](./rpi_cam_zoom.jpg)
 
@@ -120,7 +120,7 @@ $ export AWS_SECRET_ACCESS_KEY= <AWS account secret key>
 $ export AWS_DEFAULT_REGION= <AWS region>
 ```
 
-We are going to set the permission on the action field as a wildcard `*` for now. We can add a more strict security later on.
+For the IAM User, we are going to set the permission on the action field as a wildcard `*` for now. We can add a more strict security later on.
 
 ```json
 {
@@ -209,7 +209,7 @@ $ npm install @aws-sdk/client-kinesis-video @aws-sdk/client-kinesis-video-signal
 
 ### AWS KVS Client connection
 
-We'll create a react component called `VideoStream`, and import the libraries that we just installed.
+We'll create a react component called `KinesisWebRTC`, and import the libraries that we just installed.
 
 ```tsx
 import {
@@ -293,7 +293,7 @@ const VideoPlayers = view(() => {
 });
 ```
 
-The entry point for the `VideoStream` is the code block below:
+The entry point for the `KinesisWebRTC` is the code block below:
 
 ```tsx
 const KinesisWebRTC = view(({ setKvsStatus }) => {
@@ -314,7 +314,7 @@ function startPlayer() {
 }
 ```
 
-The function `startPlayerForViewer()` handles all the handshake workflow between the browser and the AWS KVS.
+The function `startPlayerForViewer()` handles all the signaling workflow between the browser, AWS KVS, and the Rover.
 
 ```tsx
 async function startPlayerForViewer() {
@@ -374,11 +374,11 @@ state.peerConnection.addEventListener('icecandidate', ({ candidate }: any) => {
 
 ### Integration
 
-After importing our `VideoStream` component, this how our `Home.tsx` would look like now together with the `JoystickControllers` and `StatusMonitor`.
+After importing our `KinesisWebRTC` component, this how our `Home.tsx` would look like now together with the `JoystickControllers` and `StatusMonitor`.
 
 ```tsx
 import { IonContent, IonPage } from '@ionic/react';
-import KinesisWebRTC from '../components/VideoStream';
+import KinesisWebRTC from '../components/KinesisWebRTC';
 import JoystickControllers from '../components/JoystickControllers';
 import StatusMonitor from '../components/StatusMonitor';
 import './Home.css';
@@ -420,6 +420,6 @@ In this article, we have covered the video streaming part of the rover's camera.
 
 ![Overview](./summary_lq.mp4)
 
-On the frontend side, we have added a new component called `VideoStream` that uses the `@aws-sdk/client-kinesis-video`, `@aws-sdk/client-kinesis-video-signaling`, and `amazon-kinesis-video-streams-webrtc` libraries to handle the WebRTC connection and video player rendering.
+On the frontend side, we have added a new component called `KinesisWebRTC` that uses the `@aws-sdk/client-kinesis-video`, `@aws-sdk/client-kinesis-video-signaling`, and `amazon-kinesis-video-streams-webrtc` libraries to handle the WebRTC connection and video player rendering.
 
-The next step would be to integrate a set of sensors into the rover, which will enable us to get useful telemetries such as battery level, temperature, humidity, and GPS coordinates. I hope you enjoy reading this, and stay tuned for the upcoming updates of this project. Thank you!
+I hope you enjoy reading this, and stay tuned for the upcoming updates of this project. Thank you!
