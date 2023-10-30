@@ -7,7 +7,7 @@ authorPosition: 'Admin'
 
 ## Overview
 
-We're now moving on to the third phase of the project, which involves the integration of an onboard 4G/LTE modem to enable remote outdoor mobility. Additionally, a new set of sensors has been introduced for telemetry transmission via AWS IoT Core using MQTT."
+We're now moving on to the third phase of the project, which involves the integration of an onboard 4G/LTE modem to enable remote outdoor mobility. Additionally, a new set of sensors has been introduced for telemetry transmission via AWS IoT Core using MQTT.
 
 ![Overview](./overview.jpg)
 
