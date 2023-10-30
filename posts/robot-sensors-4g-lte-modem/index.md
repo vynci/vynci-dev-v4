@@ -7,17 +7,17 @@ authorPosition: 'Admin'
 
 ## Overview
 
-We're now moving on to the third phase of the project, an onboard 4G/LTE modem has been added to the rover to give remote mobility outdoors, and new set of sensors for telemetry transmitted over AWS IoT Core (MQTT).
+We're now moving on to the third phase of the project, which involves the integration of an onboard 4G/LTE modem to enable remote outdoor mobility. Additionally, a new set of sensors has been introduced for telemetry transmission via AWS IoT Core using MQTT."
 
 ![Overview](./overview.jpg)
 
-The testing extends to outdoor conditions as well, which gave assessments on the data we got from the temperature, humidity, GPS (coordinates, speed and altitude), IR range, and battery voltage during rover's the full load operation.
+Our testing also extends to outdoor conditions, providing valuable assessments of the data gathered from temperature, humidity, GPS (including coordinates, speed, and altitude), IR range, and battery voltage during the rover's full-load operations.
 
 ![Overview Outdoor Test](./overview.mp4)
 
 ### Recap
 
-In [Part 2](/posts/robot-camera-video-stream-using-aws-kvs), we have covered on how to build the peer-to-peer video stream from the rover’s onboard camera into our frontend mobile application using WebRTC and AWS Kinesis Video Stream (KVS) as the Signaling Server.
+In [Part 2](/posts/robot-camera-video-stream-using-aws-kvs), we discussed the process of integrating the peer-to-peer video stream from the rover's onboard camera into our mobile frontend application. This was achieved through the utilization of WebRTC and AWS Kinesis Video Stream (KVS) as the Signaling Server.
 
 ### Source Code
 
@@ -36,7 +36,7 @@ The diagram below illustrates the high-level view of the whole system’s workfl
 
 ## Hardware
 
-This is a high-level schematic on how the new hardware components are being connected into the Raspberry Pi. The 4G/LTE modem and the GPS are communicating via USB, and the other sensors are connected via I2C.
+This schematic provides a high-level overview of the interconnections between the new hardware components and the Raspberry Pi. The 4G/LTE modem and GPS establish communication through USB, while the remaining sensors are linked via I2C.
 
 ![Schematic](./schematic.jpg)
 
@@ -64,11 +64,11 @@ With a USB interface, it can directly connect with the RPI's point of view posit
 
 ### Analog sensors
 
-Since the Raspberry Pi doesn't have an onboard analog-to-digital converter we are adding in the ADS1115, which provides a 16-bit precision at 860 samples/second over I2C. The chip can be configured as 4 single-ended input channels, or two differential channels.
+Since the Raspberry Pi doesn't have an onboard analog-to-digital converter we are adding in the ADS1115, which provides a 16-bit precision at 860 samples/second over I2C. The chip can be configured as 4 single-ended input channels or two differential channels.
 
 ![ADC](./hardware_ads1115.jpg)
 
-We will initially be using them to measure the analog output from the Voltage and IR Range sensors
+We will initially be using them to measure the analog output from the Voltage and IR Range sensors.
 
 #### **Voltage sensor**
 
@@ -194,7 +194,7 @@ lteSerialParser.on('data', (data) => {
 });
 ```
 
-The `console.log` will output something like this `25,99`. This means that we have received an RSSI of `–63dBm` and channel bit error rate is `99`, this is an excellent signal strength, if the value is below `10,99` it means that the signal strength is poor. You can read more details on these possible values on the RSSI table [here](https://sixfab.com/antenna-selection/).
+The `console.log` will output something like `25,99`. This means that we have received an RSSI of `–63dBm` and channel bit error rate is `99`, this is an excellent signal strength, if the value is below `10,99` it means that the signal strength is poor. You can read more details on these possible values on the RSSI table [here](https://sixfab.com/antenna-selection/).
 
 ### GPS (Serial)
 
@@ -382,10 +382,10 @@ This will run a web server instance (live reload) that you can test and develop 
 
 ## Summary
 
-In this article, we have covered the updates on the newly added onboard 4G/LTE modem and sensors. An outdoor test was also done, although the peer-to-peer video stream from WebRTC still needs more improvement and optimization, the next steps on project will focus more on how to fix that by improving the stabilization and fragmentation of the video feed.
+This article delves into the latest developments regarding the recently integrated onboard 4G/LTE modem and sensors. While we've conducted an outdoor test, it's worth noting that further enhancements are required for the peer-to-peer video streaming via WebRTC. Our forthcoming project steps will emphasize the enhancement of video feed stability and reduction of fragmentation to address this issue.
 
 ![Summary](./summary.jpg)
 
-Right now, the sensor data stream that we get from the rover are just for display purposes only, the next steps would be using those data to help with the navigation system of the rover.
+At the moment, the sensor data stream we receive from the rover is primarily used for display purposes. Our upcoming steps will involve harnessing this data to enhance the rover's navigation system.
 
-I hope you enjoy reading this, and stay tuned for the upcoming updates of this project. Thank you!
+I trust you find this article enjoyable, and I invite you to stay tuned for the forthcoming project updates. Thank you for your interest!
