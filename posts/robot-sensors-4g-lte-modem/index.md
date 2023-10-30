@@ -11,13 +11,13 @@ We're now moving on to the third phase of the project, which involves the integr
 
 ![Overview](./overview.jpg)
 
-Our testing also extends to outdoor conditions, providing valuable assessments of the data gathered from temperature, humidity, GPS (including coordinates, speed, and altitude), IR range, and battery voltage during the rover's full-load operations.
+The testing also extends to outdoor conditions, providing valuable assessments of the data gathered from temperature, humidity, GPS (including coordinates, speed, and altitude), IR range, and battery voltage during the rover's full-load operations.
 
 ![Overview Outdoor Test](./overview.mp4)
 
 ### Recap
 
-In [Part 2](/posts/robot-camera-video-stream-using-aws-kvs), we discussed the process of integrating the peer-to-peer video stream from the rover's onboard camera into our mobile frontend application. This was achieved through the utilization of WebRTC and AWS Kinesis Video Stream (KVS) as the Signaling Server.
+In [Part 2](/posts/robot-camera-video-stream-using-aws-kvs), we discussed the process of integrating the peer-to-peer video stream from the rover's onboard camera into the mobile frontend application. This was achieved through the utilization of WebRTC and AWS Kinesis Video Stream (KVS) as the Signaling Server.
 
 ### Source Code
 
@@ -382,10 +382,10 @@ This will run a web server instance (live reload) that you can test and develop 
 
 ## Summary
 
-This article delves into the latest developments regarding the recently integrated onboard 4G/LTE modem and sensors. While we've conducted an outdoor test, it's worth noting that further enhancements are required for the peer-to-peer video streaming via WebRTC. Our forthcoming project steps will emphasize the enhancement of video feed stability and reduction of fragmentation to address this issue.
+This article delves into the latest developments regarding the recently integrated onboard 4G/LTE modem and sensors. While we've conducted an outdoor test, it's worth noting that further enhancements are required for the peer-to-peer video streaming via WebRTC. The forthcoming project steps will emphasize the enhancement of video feed stability and reduction of fragmentation to address this issue.
 
 ![Summary](./summary.jpg)
 
-At the moment, the sensor data stream we receive from the rover is primarily used for display purposes. Our upcoming steps will involve harnessing this data to enhance the rover's navigation system.
+At the moment, the sensor data stream we receive from the rover is primarily used for display purposes. The upcoming steps will involve harnessing this data to enhance the rover's navigation system.
 
 I trust you find this article enjoyable, and I invite you to stay tuned for the forthcoming project updates. Thank you for your interest!
