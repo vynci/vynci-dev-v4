@@ -1,6 +1,6 @@
 ---
 title: 'Rovy Part 3: First outdoor test with onboard 4G modem and sensors'
-date: '2023-10-22'
+date: '2023-10-29'
 authorName: 'Vince Elizaga'
 authorPosition: 'Admin'
 ---

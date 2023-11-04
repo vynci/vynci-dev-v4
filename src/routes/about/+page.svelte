@@ -41,15 +41,18 @@
 
 <div class="flex flex-col flex-grow gap-8 pb-2 mt-6">
   <section class="w-full">
-    <div class="items-center justify-between gap-4 mb-8 border-b border-zinc-100 pb-6">
+    <div
+      class="items-center justify-between gap-4 mb-8 border-b border-zinc-100 dark:border-zinc-800 pb-6"
+    >
       <h2 class="text-sm font-medium sm:text-base text-zinc-500 dark:text-zinc-400">About me</h2>
     </div>
 
     <div class="mb-8">
       <p>
-        A maker that tinkers between software and hardware engineering. Currently based in Toronto
-        Canada, and recently immersed with cloud systems architecture, serverless computing,
-        web-mobile applications, and IoT development.
+        I am actively engaged in the dynamic fields of software and hardware engineering, with my
+        professional base located in Toronto, Canada. My recent pursuits have led me to dive deep
+        into areas such as cloud systems architecture, serverless computing, the development of web
+        and mobile applications, and the cutting-edge field of IoT development.
       </p>
     </div>
 
@@ -60,15 +63,17 @@
 
       <div class="mt-8">
         <p>
-          I'm always open to new ideas and opportunities. Whether you have a question or just want
-          to say hi.
+          I'm always open to new ideas and opportunities. Whether you have a query or simply wish to
+          extend a friendly greeting, don't hesitate to reach out.
         </p>
 
         <p class="mt-4">Here are some endpoints that could help us get connected:</p>
         <ul class="mt-2" style="list-style: inside;">
-          <li>github.com/vynci</li>
-          <li>linkedin.com/in/vynci</li>
-          <li>hello@vynci.dev</li>
+          <li><a href="https://www.github.com/vynci" target="_blank">github.com/vynci</a></li>
+          <li>
+            <a href="https://www.linkedin.com/in/vynci" target="_blank">linkedin.com/in/vynci</a>
+          </li>
+          <li><a href="mailto:hello@vynci.dev">hello@vynci.dev</a></li>
         </ul>
       </div>
     </div>
@@ -85,7 +90,7 @@
         <div
           class="flex justify-center order-1 col-span-2 gap-6 md:order-2 text-center text-sm text-zinc-400 dark:text-zinc-400"
         >
-          <div>© Copyright 2023 Vince Elizaga</div>
+          <div><a href="/">© Copyright 2023 Vince Elizaga</a></div>
         </div>
       </div>
     </div>

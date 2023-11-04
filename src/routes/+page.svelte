@@ -18,7 +18,7 @@
       class="flex items-center justify-between gap-4 mb-8 border-b border-zinc-100 dark:border-zinc-800 pb-6"
     >
       <h2 class="text-sm font-medium sm:text-base text-zinc-500 dark:text-zinc-400">
-        Random Ideas.
+        <a href="about">Random Ideas.</a>
       </h2>
     </div>
     <PostsList posts={data.posts} />
@@ -35,7 +35,7 @@
         <div
           class="flex justify-center order-1 col-span-2 gap-6 md:order-2 text-center text-sm text-zinc-400 dark:text-zinc-400"
         >
-          <div>© Copyright 2023 Vince Elizaga</div>
+          <div><a href="about">© Copyright 2023 Vince Elizaga</a></div>
         </div>
       </div>
     </div>
