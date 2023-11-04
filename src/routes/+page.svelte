@@ -17,8 +17,13 @@
     <div
       class="flex items-center justify-between gap-4 mb-8 border-b border-zinc-100 dark:border-zinc-800 pb-6"
     >
-      <h2 class="text-sm font-medium sm:text-base text-zinc-500 dark:text-zinc-400">
-        <a href="about">Random Ideas.</a>
+      <h2
+        class="text-sm font-medium sm:text-base text-gray-100 pr-2 pl-2 rounded-md dark:bg-zinc-500 bg-zinc-400"
+      >
+        <a href="about"
+          >$ <span>whoami</span>
+          <span class="font-small bg-gray-100 dark:bg-gray-200 blink">..</span>
+        </a>
       </h2>
     </div>
     <PostsList posts={data.posts} />
