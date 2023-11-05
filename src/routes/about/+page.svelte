@@ -56,10 +56,11 @@
 
     <div class="mb-8">
       <p>
-        I am actively engaged in the dynamic fields of software and hardware engineering, with my
-        professional base located in Toronto, Canada. My recent pursuits have led me to dive deep
-        into areas such as cloud systems architecture, serverless computing, the development of web
-        and mobile applications, and the cutting-edge field of IoT development.
+        Greetings! I'm Vince Elizaga, an enthusiastic professional engaged in the dynamic fields of
+        software and hardware engineering. I am currently based in the vibrant city of Toronto,
+        Canada. My recent pursuits have led me to dive deep into areas such as cloud systems
+        architecture, serverless computing, the development of web and mobile applications, and the
+        cutting-edge field of IoT development.
       </p>
     </div>
 
