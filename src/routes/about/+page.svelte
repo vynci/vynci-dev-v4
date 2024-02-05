@@ -71,8 +71,8 @@
 
       <div class="mt-8">
         <p>
-          I'm always open to new ideas and opportunities. Whether you have an inquiry or simply wish to
-          extend a friendly greeting, don't hesitate to reach out.
+          I'm always open to new ideas and opportunities. Whether you have an inquiry or simply wish
+          to extend a friendly greeting, don't hesitate to reach out.
         </p>
 
         <p class="mt-4">Here are some endpoints that could help us get connected:</p>
@@ -98,7 +98,7 @@
         <div
           class="flex justify-center order-1 col-span-2 gap-6 md:order-2 text-center text-sm text-zinc-400 dark:text-zinc-400"
         >
-          <div><a href="/">© Copyright 2023 Vince Elizaga</a></div>
+          <div><a href="/">© Copyright 2024 Vince Elizaga</a></div>
         </div>
       </div>
     </div>

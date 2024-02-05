@@ -118,7 +118,7 @@
         <div
           class="flex justify-center order-1 col-span-2 gap-6 md:order-2 text-center text-sm text-zinc-400 dark:text-zinc-400"
         >
-          <div><a href="/about">© Copyright 2023 Vince Elizaga</a></div>
+          <div><a href="/about">© Copyright 2024 Vince Elizaga</a></div>
         </div>
       </div>
     </div>
