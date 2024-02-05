@@ -71,7 +71,7 @@
 
       <div class="mt-8">
         <p>
-          I'm always open to new ideas and opportunities. Whether you have a query or simply wish to
+          I'm always open to new ideas and opportunities. Whether you have an inquiry or simply wish to
           extend a friendly greeting, don't hesitate to reach out.
         </p>
 
