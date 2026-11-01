@@ -1,0 +1,487 @@
+{
+  "version": 1,
+  "files": {
+    "posts/file-uploader-using-aws-s3-api-gateway-lambda/overview.png": {
+      "key": "posts/file-uploader-using-aws-s3-api-gateway-lambda/overview.05300eff13.png",
+      "sha256": "05300eff13ac7001644d757aab35d9abfe98ecaa580dcb9d1aa0d0fc8f3d7698",
+      "bytes": 174441,
+      "contentType": "image/png",
+      "width": 1920,
+      "height": 1080
+    },
+    "posts/file-uploader-using-aws-s3-api-gateway-lambda/postman_1.png": {
+      "key": "posts/file-uploader-using-aws-s3-api-gateway-lambda/postman_1.f3e7f90d67.png",
+      "sha256": "f3e7f90d671a09d2366aa4f0de188a7b8ea3ff65739556cc241b6c9afc0c36c2",
+      "bytes": 276202,
+      "contentType": "image/png",
+      "width": 2880,
+      "height": 1684
+    },
+    "posts/file-uploader-using-aws-s3-api-gateway-lambda/postman_2.png": {
+      "key": "posts/file-uploader-using-aws-s3-api-gateway-lambda/postman_2.5071f23aa3.png",
+      "sha256": "5071f23aa32108ebcc858e260f5386114d870d6f87e4a82200bdd7eab8324d42",
+      "bytes": 334452,
+      "contentType": "image/png",
+      "width": 2880,
+      "height": 1682
+    },
+    "posts/iot-mobile-controlled-relays-through-esp8266-via-mqtt/circuit_diagram.png": {
+      "key": "posts/iot-mobile-controlled-relays-through-esp8266-via-mqtt/circuit_diagram.605896d598.png",
+      "sha256": "605896d59818d91393bb6e5606f41baca8e69e6b03a09e2c395662fcfde86173",
+      "bytes": 75438,
+      "contentType": "image/png",
+      "width": 987,
+      "height": 927
+    },
+    "posts/iot-mobile-controlled-relays-through-esp8266-via-mqtt/intro.jpg": {
+      "key": "posts/iot-mobile-controlled-relays-through-esp8266-via-mqtt/intro.322402b84c.jpg",
+      "sha256": "322402b84cbbd723015933ecc577b703108ee76565370a81a1dcfd2dd2126c95",
+      "bytes": 67529,
+      "contentType": "image/jpeg",
+      "width": 1280,
+      "height": 720
+    },
+    "posts/iot-mobile-controlled-relays-through-esp8266-via-mqtt/iot.mp4": {
+      "key": "posts/iot-mobile-controlled-relays-through-esp8266-via-mqtt/iot.84292166bf.mp4",
+      "sha256": "84292166bfb739ab36888443c16672e283c4117229587f8d96e7a4a394e121fc",
+      "bytes": 10622418,
+      "contentType": "video/mp4",
+      "width": 1280,
+      "height": 720,
+      "poster": {
+        "key": "posts/iot-mobile-controlled-relays-through-esp8266-via-mqtt/iot.poster.0c6c229886.jpg",
+        "bytes": 98776,
+        "contentType": "image/jpeg",
+        "width": 1280,
+        "height": 720
+      }
+    },
+    "posts/iot-mobile-controlled-relays-through-esp8266-via-mqtt/systems_diagram.png": {
+      "key": "posts/iot-mobile-controlled-relays-through-esp8266-via-mqtt/systems_diagram.787aead3bc.png",
+      "sha256": "787aead3bc03fcf4c3c5cae3681f400252a8db3648f9280e1723891219359590",
+      "bytes": 18110,
+      "contentType": "image/png",
+      "width": 684,
+      "height": 392
+    },
+    "posts/robot-camera-video-stream-using-aws-kvs/architecture_p2.jpg": {
+      "key": "posts/robot-camera-video-stream-using-aws-kvs/architecture_p2.3aef947d63.jpg",
+      "sha256": "3aef947d63bd2b82ac7657d5864459d31b5fa5aae4ce9e8ddd85d0320f40c0bd",
+      "bytes": 225811,
+      "contentType": "image/jpeg",
+      "width": 1905,
+      "height": 812
+    },
+    "posts/robot-camera-video-stream-using-aws-kvs/aws_kvs_create.png": {
+      "key": "posts/robot-camera-video-stream-using-aws-kvs/aws_kvs_create.1237ea1fe5.png",
+      "sha256": "1237ea1fe5578a271ce0614cb07feddcc36f6a52165ca4abd7587fe5d3186ef9",
+      "bytes": 239566,
+      "contentType": "image/png",
+      "width": 1156,
+      "height": 1490
+    },
+    "posts/robot-camera-video-stream-using-aws-kvs/ionic_serve.png": {
+      "key": "posts/robot-camera-video-stream-using-aws-kvs/ionic_serve.4df11cb05d.png",
+      "sha256": "4df11cb05d668b504bbff6c0c4bee2638f6b89b32ad518044f5a23af3bbb3a68",
+      "bytes": 2508151,
+      "contentType": "image/png",
+      "width": 3840,
+      "height": 2078
+    },
+    "posts/robot-camera-video-stream-using-aws-kvs/kvs_client_terminal_start.png": {
+      "key": "posts/robot-camera-video-stream-using-aws-kvs/kvs_client_terminal_start.5edc66ea26.png",
+      "sha256": "5edc66ea26050d08a7e32252320a33154abd1e2268dd7dfc827eff293396b665",
+      "bytes": 302726,
+      "contentType": "image/png",
+      "width": 1890,
+      "height": 812
+    },
+    "posts/robot-camera-video-stream-using-aws-kvs/kvs_test.png": {
+      "key": "posts/robot-camera-video-stream-using-aws-kvs/kvs_test.45f46d9055.png",
+      "sha256": "45f46d905507c04673c4f135b8260321012df45c5ad149b0c72627560b8c1df5",
+      "bytes": 900190,
+      "contentType": "image/png",
+      "width": 2290,
+      "height": 1460
+    },
+    "posts/robot-camera-video-stream-using-aws-kvs/overview_lq.mp4": {
+      "key": "posts/robot-camera-video-stream-using-aws-kvs/overview_lq.1b609718ea.mp4",
+      "sha256": "1b609718eaf3f61a88ad9da3a33d4785acfbce2dc7b731b0ecc230533040f434",
+      "bytes": 9559594,
+      "contentType": "video/mp4",
+      "width": 960,
+      "height": 540,
+      "poster": {
+        "key": "posts/robot-camera-video-stream-using-aws-kvs/overview_lq.poster.e9ef01c208.jpg",
+        "bytes": 41603,
+        "contentType": "image/jpeg",
+        "width": 960,
+        "height": 540
+      }
+    },
+    "posts/robot-camera-video-stream-using-aws-kvs/overview.png": {
+      "key": "posts/robot-camera-video-stream-using-aws-kvs/overview.83b0218fc9.png",
+      "sha256": "83b0218fc99c1b91445a46cd98fe83f3429b4c57640e4ee119d104d7e2281e6e",
+      "bytes": 2179889,
+      "contentType": "image/png",
+      "width": 2042,
+      "height": 1198
+    },
+    "posts/robot-camera-video-stream-using-aws-kvs/raspi_config_interface.png": {
+      "key": "posts/robot-camera-video-stream-using-aws-kvs/raspi_config_interface.61c4dd5a98.png",
+      "sha256": "61c4dd5a985de75ae92ad03b47c57f4573f8cd1ae620c994549f3096e1045a3b",
+      "bytes": 128017,
+      "contentType": "image/png",
+      "width": 1856,
+      "height": 1094
+    },
+    "posts/robot-camera-video-stream-using-aws-kvs/raspi_config_main.png": {
+      "key": "posts/robot-camera-video-stream-using-aws-kvs/raspi_config_main.bbda462d5c.png",
+      "sha256": "bbda462d5c6728f8205c92498c4ffc7f34b6da76a5f411d550379678028ad931",
+      "bytes": 117661,
+      "contentType": "image/png",
+      "width": 1856,
+      "height": 1046
+    },
+    "posts/robot-camera-video-stream-using-aws-kvs/rpi_cam_close.jpg": {
+      "key": "posts/robot-camera-video-stream-using-aws-kvs/rpi_cam_close.db59f87ea5.jpg",
+      "sha256": "db59f87ea5aa840c372b4efcd8e5b450a29c20fbdd2f5de4f2f89950f3743a04",
+      "bytes": 204951,
+      "contentType": "image/jpeg",
+      "width": 1024,
+      "height": 768
+    },
+    "posts/robot-camera-video-stream-using-aws-kvs/rpi_cam_open.jpg": {
+      "key": "posts/robot-camera-video-stream-using-aws-kvs/rpi_cam_open.0640019f18.jpg",
+      "sha256": "0640019f1808a7ee8f550625a483dda812d6d7d17b34eb5c8c7312c55d6afdd4",
+      "bytes": 266564,
+      "contentType": "image/jpeg",
+      "width": 1024,
+      "height": 768
+    },
+    "posts/robot-camera-video-stream-using-aws-kvs/rpi_cam_zoom.jpg": {
+      "key": "posts/robot-camera-video-stream-using-aws-kvs/rpi_cam_zoom.15e1040905.jpg",
+      "sha256": "15e104090510d3395d44f93b0b295ed815f22d5965e16708ddb1e9cc73c3309b",
+      "bytes": 151740,
+      "contentType": "image/jpeg",
+      "width": 1024,
+      "height": 768
+    },
+    "posts/robot-camera-video-stream-using-aws-kvs/schem_p2.jpg": {
+      "key": "posts/robot-camera-video-stream-using-aws-kvs/schem_p2.31287fbe63.jpg",
+      "sha256": "31287fbe6382fac897f8670e99e38649aeb8dbdd4f76bffb94c229591dfa146d",
+      "bytes": 144277,
+      "contentType": "image/jpeg",
+      "width": 1304,
+      "height": 1066
+    },
+    "posts/robot-camera-video-stream-using-aws-kvs/summary_lq.mp4": {
+      "key": "posts/robot-camera-video-stream-using-aws-kvs/summary_lq.19ae1ac2f5.mp4",
+      "sha256": "19ae1ac2f599ba014731274f716e0f74c1a7c7ec33c469c2473017f6aa2d2a11",
+      "bytes": 18535214,
+      "contentType": "video/mp4",
+      "width": 960,
+      "height": 540,
+      "poster": {
+        "key": "posts/robot-camera-video-stream-using-aws-kvs/summary_lq.poster.d3cd813bb0.jpg",
+        "bytes": 34423,
+        "contentType": "image/jpeg",
+        "width": 960,
+        "height": 540
+      }
+    },
+    "posts/robot-control-using-aws-iot-core/architecture_p1.jpg": {
+      "key": "posts/robot-control-using-aws-iot-core/architecture_p1.d9487061ab.jpg",
+      "sha256": "d9487061ab7d5522cb09a63415827fcd22d1f66e5751460570f65ce4d8fbb0ca",
+      "bytes": 131633,
+      "contentType": "image/jpeg",
+      "width": 1764,
+      "height": 534
+    },
+    "posts/robot-control-using-aws-iot-core/aws_create_thing_1.png": {
+      "key": "posts/robot-control-using-aws-iot-core/aws_create_thing_1.61f11d8951.png",
+      "sha256": "61f11d8951af214b4f43866e01e6ada2b59ed39ac30426789f64bc32caff019a",
+      "bytes": 340031,
+      "contentType": "image/png",
+      "width": 2038,
+      "height": 1798
+    },
+    "posts/robot-control-using-aws-iot-core/aws_create_thing_2.png": {
+      "key": "posts/robot-control-using-aws-iot-core/aws_create_thing_2.cc3ef23dc9.png",
+      "sha256": "cc3ef23dc9009dcfce008a1e764df158e6f9e346bde707b560a8b1264945c706",
+      "bytes": 255113,
+      "contentType": "image/png",
+      "width": 2052,
+      "height": 1160
+    },
+    "posts/robot-control-using-aws-iot-core/aws_create_thing_3.png": {
+      "key": "posts/robot-control-using-aws-iot-core/aws_create_thing_3.9c82134bfa.png",
+      "sha256": "9c82134bfa5578e9472e18c2c456db0ab08ddcfac87f3df48f4ac722fbe6ca02",
+      "bytes": 254164,
+      "contentType": "image/png",
+      "width": 1184,
+      "height": 1742
+    },
+    "posts/robot-control-using-aws-iot-core/aws_get_endpoint.png": {
+      "key": "posts/robot-control-using-aws-iot-core/aws_get_endpoint.299f980c5d.png",
+      "sha256": "299f980c5de162118aa6bb3dff499db58ebf265d53ca56eaebe59ae53649dc49",
+      "bytes": 234412,
+      "contentType": "image/png",
+      "width": 2328,
+      "height": 1394
+    },
+    "posts/robot-control-using-aws-iot-core/aws_iot_core.png": {
+      "key": "posts/robot-control-using-aws-iot-core/aws_iot_core.a832599409.png",
+      "sha256": "a83259940973ddbdddda44730925cca563daf54cc6159b9797ba851c99ca6393",
+      "bytes": 51783,
+      "contentType": "image/png",
+      "width": 1665,
+      "height": 450
+    },
+    "posts/robot-control-using-aws-iot-core/frontend_ui.png": {
+      "key": "posts/robot-control-using-aws-iot-core/frontend_ui.78d11d1981.png",
+      "sha256": "78d11d1981f0b04954ef6797b7e4c1c1a5270be82b4470ca7c8c3c4ab2b9f8f5",
+      "bytes": 94002,
+      "contentType": "image/png",
+      "width": 2556,
+      "height": 1496
+    },
+    "posts/robot-control-using-aws-iot-core/hardware_chassis.jpg": {
+      "key": "posts/robot-control-using-aws-iot-core/hardware_chassis.8ee39ec965.jpg",
+      "sha256": "8ee39ec965f6629b1c23a43abe61cec6d171f233dc50a190ab56a6ee43421b1b",
+      "bytes": 235487,
+      "contentType": "image/jpeg",
+      "width": 1024,
+      "height": 768
+    },
+    "posts/robot-control-using-aws-iot-core/hardware_full.jpg": {
+      "key": "posts/robot-control-using-aws-iot-core/hardware_full.7275a2607f.jpg",
+      "sha256": "7275a2607f9f7e829bfe8a4a14d91a7978f5efae9d4bb71b1cfd527ad50b06d2",
+      "bytes": 234767,
+      "contentType": "image/jpeg",
+      "width": 1024,
+      "height": 768
+    },
+    "posts/robot-control-using-aws-iot-core/hardware_md.jpg": {
+      "key": "posts/robot-control-using-aws-iot-core/hardware_md.4da94f4ff5.jpg",
+      "sha256": "4da94f4ff547d0626127af587ddff1e6c34f181e8f9572ef4d93808d3d0a72eb",
+      "bytes": 225886,
+      "contentType": "image/jpeg",
+      "width": 1024,
+      "height": 768
+    },
+    "posts/robot-control-using-aws-iot-core/hardware_psu.jpg": {
+      "key": "posts/robot-control-using-aws-iot-core/hardware_psu.6196bb3f1e.jpg",
+      "sha256": "6196bb3f1e9c9853c12a91753046b7b08356f232aa867970094b5fbf5670d414",
+      "bytes": 187230,
+      "contentType": "image/jpeg",
+      "width": 1024,
+      "height": 707
+    },
+    "posts/robot-control-using-aws-iot-core/hardware_rpi.jpg": {
+      "key": "posts/robot-control-using-aws-iot-core/hardware_rpi.4184105b2f.jpg",
+      "sha256": "4184105b2f33425c6c1af5624d390b16efa7dc06adbf6df1775c44cc28df2d2f",
+      "bytes": 219323,
+      "contentType": "image/jpeg",
+      "width": 1024,
+      "height": 768
+    },
+    "posts/robot-control-using-aws-iot-core/ionic_serve.png": {
+      "key": "posts/robot-control-using-aws-iot-core/ionic_serve.22d70b8d07.png",
+      "sha256": "22d70b8d07140b8de463dee0c4653a34dccdb5eb89bb9b82e92101e451a51ef8",
+      "bytes": 407766,
+      "contentType": "image/png",
+      "width": 3840,
+      "height": 2078
+    },
+    "posts/robot-control-using-aws-iot-core/rovy_p1_conclusion.mp4": {
+      "key": "posts/robot-control-using-aws-iot-core/rovy_p1_conclusion.ab71e30f9b.mp4",
+      "sha256": "ab71e30f9ba17fe13f3ace25525b40e65c134b007db0834175595f71ebd4be8d",
+      "bytes": 9095667,
+      "contentType": "video/mp4",
+      "width": 960,
+      "height": 540,
+      "poster": {
+        "key": "posts/robot-control-using-aws-iot-core/rovy_p1_conclusion.poster.f63f1ebe1e.jpg",
+        "bytes": 31010,
+        "contentType": "image/jpeg",
+        "width": 960,
+        "height": 540
+      }
+    },
+    "posts/robot-control-using-aws-iot-core/rovy_p1_overview.mp4": {
+      "key": "posts/robot-control-using-aws-iot-core/rovy_p1_overview.45faa0e4e1.mp4",
+      "sha256": "45faa0e4e18e92d1a0865082ff6c12d893a989b96981e816b53cf93180c1d3d6",
+      "bytes": 9362915,
+      "contentType": "video/mp4",
+      "width": 960,
+      "height": 540,
+      "poster": {
+        "key": "posts/robot-control-using-aws-iot-core/rovy_p1_overview.poster.5f7f7403d9.jpg",
+        "bytes": 41437,
+        "contentType": "image/jpeg",
+        "width": 960,
+        "height": 540
+      }
+    },
+    "posts/robot-control-using-aws-iot-core/rovy_p1_steering.png": {
+      "key": "posts/robot-control-using-aws-iot-core/rovy_p1_steering.08760317b3.png",
+      "sha256": "08760317b360d65c749a3d22828bd31619f9b252e28bf5b7e871f25a5dffed76",
+      "bytes": 179989,
+      "contentType": "image/png",
+      "width": 2314,
+      "height": 1898
+    },
+    "posts/robot-control-using-aws-iot-core/rovy_schem_1.png": {
+      "key": "posts/robot-control-using-aws-iot-core/rovy_schem_1.dc3bfca00d.png",
+      "sha256": "dc3bfca00d02fddcb7c041ed08267b1384672d6d6328410d56ab819bbd799008",
+      "bytes": 113732,
+      "contentType": "image/png",
+      "width": 1214,
+      "height": 1068
+    },
+    "posts/robot-control-using-aws-iot-core/rovy_schem_2.png": {
+      "key": "posts/robot-control-using-aws-iot-core/rovy_schem_2.fda0bc05e7.png",
+      "sha256": "fda0bc05e71abc1b95605423191b6d5eb8d723d61237430704d85fea6b55c196",
+      "bytes": 76600,
+      "contentType": "image/png",
+      "width": 1084,
+      "height": 902
+    },
+    "posts/robot-sensors-4g-lte-modem/architecture.jpg": {
+      "key": "posts/robot-sensors-4g-lte-modem/architecture.b75eae5c1d.jpg",
+      "sha256": "b75eae5c1d7afa93352b7c1362ca0a966f31d00b4c2ea2d23a6eb371894bf3ee",
+      "bytes": 193206,
+      "contentType": "image/jpeg",
+      "width": 1558,
+      "height": 708
+    },
+    "posts/robot-sensors-4g-lte-modem/hardware_ads1115.jpg": {
+      "key": "posts/robot-sensors-4g-lte-modem/hardware_ads1115.480b2ea8ee.jpg",
+      "sha256": "480b2ea8ee3b13bcba882fcaba7eae72b93811087a25f7c1952917497b21b86e",
+      "bytes": 247140,
+      "contentType": "image/jpeg",
+      "width": 1024,
+      "height": 768
+    },
+    "posts/robot-sensors-4g-lte-modem/hardware_bme.jpg": {
+      "key": "posts/robot-sensors-4g-lte-modem/hardware_bme.b78f38e1b5.jpg",
+      "sha256": "b78f38e1b5d25af4c7dec405710ffcb98b59e069330a2acde2c0a95bf1bae79a",
+      "bytes": 245791,
+      "contentType": "image/jpeg",
+      "width": 1024,
+      "height": 768
+    },
+    "posts/robot-sensors-4g-lte-modem/hardware_ec25.jpg": {
+      "key": "posts/robot-sensors-4g-lte-modem/hardware_ec25.a4753aaa88.jpg",
+      "sha256": "a4753aaa88f5efcc2eabff33ed5821646254e17290e6c9f2f05cb2c6970c6ca7",
+      "bytes": 272419,
+      "contentType": "image/jpeg",
+      "width": 1024,
+      "height": 679
+    },
+    "posts/robot-sensors-4g-lte-modem/hardware_gps.jpg": {
+      "key": "posts/robot-sensors-4g-lte-modem/hardware_gps.213ac4c346.jpg",
+      "sha256": "213ac4c34636555bb4d5ec09ae4fdb63181c9d84a8627ec7d4f59b9b7994de3a",
+      "bytes": 279172,
+      "contentType": "image/jpeg",
+      "width": 1024,
+      "height": 768
+    },
+    "posts/robot-sensors-4g-lte-modem/hardware_ir.jpg": {
+      "key": "posts/robot-sensors-4g-lte-modem/hardware_ir.fa871c7fa9.jpg",
+      "sha256": "fa871c7fa97801aabe64c31f5a5d8816d971982095162cb127a38864f9a747de",
+      "bytes": 242622,
+      "contentType": "image/jpeg",
+      "width": 1024,
+      "height": 768
+    },
+    "posts/robot-sensors-4g-lte-modem/hardware_voltage.jpg": {
+      "key": "posts/robot-sensors-4g-lte-modem/hardware_voltage.63a7270b71.jpg",
+      "sha256": "63a7270b71c29d0c164f2e4ee71b2278cd9e069a6b3e72848cc655470e4b2eea",
+      "bytes": 250533,
+      "contentType": "image/jpeg",
+      "width": 1024,
+      "height": 768
+    },
+    "posts/robot-sensors-4g-lte-modem/ionic_serve.png": {
+      "key": "posts/robot-sensors-4g-lte-modem/ionic_serve.2cd2514528.png",
+      "sha256": "2cd25145283a5ee35d3071e03b6ba580b4e1190d472307e9fa5e2d654005c968",
+      "bytes": 956601,
+      "contentType": "image/png",
+      "width": 3838,
+      "height": 2076
+    },
+    "posts/robot-sensors-4g-lte-modem/overview.jpg": {
+      "key": "posts/robot-sensors-4g-lte-modem/overview.88d654e280.jpg",
+      "sha256": "88d654e2806c4812db0d89eedfb5378c4056ff4869df34b9ca68eaa4bf68d7c1",
+      "bytes": 777303,
+      "contentType": "image/jpeg",
+      "width": 2048,
+      "height": 1150
+    },
+    "posts/robot-sensors-4g-lte-modem/overview.mp4": {
+      "key": "posts/robot-sensors-4g-lte-modem/overview.6d8c0bb315.mp4",
+      "sha256": "6d8c0bb315bb8dc5dc1ba7758aa591944c762ebb824b06ce821c04933cac858d",
+      "bytes": 9707953,
+      "contentType": "video/mp4",
+      "width": 960,
+      "height": 540,
+      "poster": {
+        "key": "posts/robot-sensors-4g-lte-modem/overview.poster.9a8de223d2.jpg",
+        "bytes": 74094,
+        "contentType": "image/jpeg",
+        "width": 960,
+        "height": 540
+      }
+    },
+    "posts/robot-sensors-4g-lte-modem/schematic.jpg": {
+      "key": "posts/robot-sensors-4g-lte-modem/schematic.d23ed729f2.jpg",
+      "sha256": "d23ed729f220fe9848e6636f73a8221ac93a0813bbd5b61471a73da2e93cc268",
+      "bytes": 148904,
+      "contentType": "image/jpeg",
+      "width": 1104,
+      "height": 864
+    },
+    "posts/robot-sensors-4g-lte-modem/summary.jpg": {
+      "key": "posts/robot-sensors-4g-lte-modem/summary.ff0ef00616.jpg",
+      "sha256": "ff0ef0061624c6bf0af8785f9350ba3397420ed922e892e1ba3bde08f269beb9",
+      "bytes": 866479,
+      "contentType": "image/jpeg",
+      "width": 2048,
+      "height": 1150
+    },
+    "posts/sending-data-to-outer-space-using-javascript/circuit_diag.png": {
+      "key": "posts/sending-data-to-outer-space-using-javascript/circuit_diag.9c872f4764.png",
+      "sha256": "9c872f4764ea342c2710ae6574c99fa2540b60e0a2b078ca2361573f7d807068",
+      "bytes": 66295,
+      "contentType": "image/png",
+      "width": 1292,
+      "height": 480
+    },
+    "posts/sending-data-to-outer-space-using-javascript/overview.jpeg": {
+      "key": "posts/sending-data-to-outer-space-using-javascript/overview.d01856445e.jpeg",
+      "sha256": "d01856445e8de0ca10cb813f50e0ca3e32a982584628b76a494e96c779eb82aa",
+      "bytes": 93206,
+      "contentType": "image/jpeg",
+      "width": 1200,
+      "height": 1227
+    },
+    "posts/sending-data-to-outer-space-using-javascript/sat_fundamentals.png": {
+      "key": "posts/sending-data-to-outer-space-using-javascript/sat_fundamentals.bc416bbd3c.png",
+      "sha256": "bc416bbd3c9326cbcda9b1f0f058d4e5d8e746a1c8ecfebbd0c1f66686828fb5",
+      "bytes": 235078,
+      "contentType": "image/png",
+      "width": 1197,
+      "height": 1082
+    },
+    "posts/serverless-rest-api-with-aws-gateway-lambda-dynamodb/intro.png": {
+      "key": "posts/serverless-rest-api-with-aws-gateway-lambda-dynamodb/intro.681b7a7d9f.png",
+      "sha256": "681b7a7d9f78b77772303e8743ca2c28b3b2c568df1a5c908c55b908826eee8b",
+      "bytes": 52303,
+      "contentType": "image/png",
+      "width": 1200,
+      "height": 712
+    }
+  }
+}

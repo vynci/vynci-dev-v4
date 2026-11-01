@@ -16,3 +16,18 @@ next-env.d.ts
 *.pem
 .env*
 .vercel
+
+# infra (AWS CDK)
+/infra/node_modules/
+/infra/cdk.out*/
+
+# post media: binaries are synced to S3 by `pnpm media:sync`; media-manifest.json is committed
+/posts/**/*.png
+/posts/**/*.jpg
+/posts/**/*.jpeg
+/posts/**/*.gif
+/posts/**/*.webp
+/posts/**/*.avif
+/posts/**/*.svg
+/posts/**/*.mp4
+/posts/**/*.webm

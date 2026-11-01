@@ -1,0 +1,486 @@
+{
+  "file-uploader-using-aws-s3-api-gateway-lambda": {
+    "headings": [
+      {
+        "depth": 2,
+        "id": "overview"
+      },
+      {
+        "depth": 2,
+        "id": "objective"
+      },
+      {
+        "depth": 2,
+        "id": "lets-dive-in"
+      },
+      {
+        "depth": 3,
+        "id": "frontend"
+      },
+      {
+        "depth": 3,
+        "id": "backend"
+      },
+      {
+        "depth": 2,
+        "id": "deployment"
+      },
+      {
+        "depth": 2,
+        "id": "summary"
+      }
+    ],
+    "readingTime": "7 min read",
+    "date": "2022-10-07",
+    "description": "This is a quick implementation of a File Uploader API that is deployed in AWS using API Gateway, Lambda, and S3. This API can upload any file type. We will be using Nodejs along with serverless framework to help us easily deploy services in AWS.",
+    "text": "class=\"prose dark:prose-invert\">Overview This is a quick implementation of a File Uploader API that is deployed in AWS using API Gateway, Lambda, and S3. This API can upload any file type. We will be using Nodejs along with serverless framework to help us easily deploy services in AWS. Objective In this simple implementation, We want to upload any file type as a binary. This action will be triggered by the user through an HTTP POST method. The binary file will be in the body as a payload. Once the data arrives in the cloud (AWS Lambda), we will then prepare that data to be stored in S3. Once successfully stored, we will return a response back to the user with the URL that specifies the location of the file uploaded. If you want to skip directly into the source code, you can check it out here Let’s Dive in! We will now discuss things in detail on how the data will be (1) passed from the frontend, (2) processed in the cloud, (3) then send a response back to the user. Frontend For testing purposes, we’ll be using POSTMAN as the frontend. We can easily specify the body type in the payload here. Let us set that as “binary” and upload the file by clicking “Select File”. We also need to add a parameter in the headers that will specify our file name, lets just call that filename (you can use any prop name here you want), then we’ll be having the value of the filename (my_file.pdf). Backend Once we click on the “Send” button it will now execute a POST request to the API, and then AWS API Gateway will trigger an event to our lambda function, at the same time passing the headers and body in the event object. From the event object, we will be extracting both the filename from the headers and the body of the actual binary file. export const singleFileUpload = async (event) => { const filename = event.headers.filename; const binary_file = event.body ... Now that we have the data on the lambda side, we have to convert first the binary file which is being translated into base64 when we upload that through the frontend and HTTP into a Buffer, this is how S3 writes that file, which also the same when you do a filesystem write in Nodejs. Here is the code for that: const bufferData = new Buffer(binary_file, 'base64'); const path = folderPath + `${new Date().getTime()}_${filename}`; const params = { Body: bufferData, Bucket: env.fileBucket, Key: path }; const s3Result = await s3.putObject(params).promise(); The result from the s3.putObject promise is just an ETag, we will not be using that, but we’ll just include that in the response object to the user. Now that the data is stored in S3, we will be returning a 200 response to the user with the URL of the uploaded file. return { statusCode: 200, headers: { 'Access-Control-Allow-Origin': '*' }, body: JSON.stringify({ data: { status: 'success', s3Result, fileUrl: env.fileRootPath + path } }) }; We’ll now be expecting this sample response from the backend to the frontend: { \"data\": { \"s3Result\": { \"ETag\": \"\"72366728430770497f95a541c3f010e4\"\" }, \"status\": \"success\", \"fileUrl\": \"https://s3-xxx.amazonaws.com/test-s3-bucket-prod/test_folder/1666644793194_my_file.pdf\" } } Deployment Since we are using serverless framework for this demonstration. We need need to specify first the serverless.yml file which serves as a config file on how these services will be deployed to AWS. On this line here, we’ll just input the name we want for this service. service: serverless-file-upload-api On the provider property, we’ll specify here the node runtime that is going to be used, the region on which this service is going to be deployed as well as the environment (staging or production), and the permission needed for us to be able to write to the S3 bucket. provider: name: aws runtime: nodejs12.x region: us-east-1 environment: ${file(env.yml):${self:custom.stage}} iamRoleStatements: - Effect: 'Allow' Action: - 's3:PutObject' Resource: 'arn:aws:s3:::${self:provider.environment.fileBucket}/*' We can then now specify the lambda function and the API gateway that will trigger it. functions: singleFileUpload: handler: src/handlers/main.singleFileUpload events: - http: method: post path: file/single/upload cors: ${self:custom.cors} Now everything is ready, we can deploy this now using the serverless framework CLI tool. $ node --max-old-space-size=8192 ./node_modules/.bin/serverless deploy -s prod -v One more thing, we need to configure the API gateway to accept binary media types. We can do that by going into your API gateway settings. Add this value */* , API Gateway will look at the Content-Type and Accept HTTP headers to decide how to handle the body. We need to redeploy the whole service again for this to work. Once deployed, that is it. You have now a simple working file uploader that you can use in your application. Summary We have now the idea on how to implement a simple serverless binary file uploader. We have discussed here the flow of the data that is being passed from the frontend into the backend, then return a response back to the frontend with the URL of the file stored in the cloud. Now that we know the concept, we can easily extend this to accept multiple files, Or even perform any further processing on the files that are being uploaded like creating multiple sizes for that certain image or video. I had fun writing this article, I hope you learned from this. And I would love to get some feedbacks. Thanks! :)"
+  },
+  "iot-mobile-controlled-relays-through-esp8266-via-mqtt": {
+    "headings": [
+      {
+        "depth": 2,
+        "id": "overview"
+      },
+      {
+        "depth": 2,
+        "id": "requirements"
+      },
+      {
+        "depth": 3,
+        "id": "hardware"
+      },
+      {
+        "depth": 3,
+        "id": "software"
+      },
+      {
+        "depth": 2,
+        "id": "assembling-the-circuit"
+      },
+      {
+        "depth": 2,
+        "id": "preparing-the-software"
+      },
+      {
+        "depth": 2,
+        "id": "diving-into-the-code"
+      },
+      {
+        "depth": 3,
+        "id": "rest-api-server--mqtt-client"
+      },
+      {
+        "depth": 3,
+        "id": "esp8266-arduino-code"
+      },
+      {
+        "depth": 3,
+        "id": "ionic---mobile-app"
+      },
+      {
+        "depth": 2,
+        "id": "conclusion"
+      }
+    ],
+    "readingTime": "9 min read",
+    "date": "2017-11-17",
+    "description": "The goal of this article is to create a very simple low level IoT application. This focuses more on how to build it from the ground up without using existing IoT Platform as service such AWS IoT, IBM Bluemix, Samsung or Artik.",
+    "text": "class=\"prose dark:prose-invert\">Overview The goal of this article is to create a very simple low level IoT application. This focuses more on how to build it from the ground up without using existing IoT Platform as service such AWS IoT, IBM Bluemix, Samsung or Artik. The system is based on a very cheap $3 wifi module - ESP8266 which connects to the Node.js REST API server via Mosquitto’s free online MQTT Broker (test.mosquitto.org). The Android Mobile App is built using Ionic Framework utilizing AngularJs. The REST API Server is hosted on a cloud server(heroku) which enables the relays to be controlled online via internet. The diagram below illustrates the connection flow of the system. The ESP8266 Wifi Module should be connected to the internet through wifi for this to work, as well as your mobile device. This article shows you how to make your own REST API server for the ESP8266 and your Mobile App to communicate via MQTT. You can use the existing REST API server that is deployed in Heroku(http://esp8266-relays.herokuapp.com) or you can deploy your own. If you don’t want to use “test.mosquitto.org” as your MQTT Broker, you can have your own by downloading and installing the Mosquitto here. Requirements Hardware ESP8266 5V Power Supply ( at least 1A ) 3.3V Voltage Regulator 5V Relays 2N2222A Transistor Resistors Capacitors 1N4108 Diodes LEDs Software Node.js Ionic Framework Arduino IDE Assembling the Circuit The ESP8266 chip module is not 5V tolerant, so you have to add a 3.3V regulator. I used KIA78R25API in this project. It is a 1A 4 TERMINAL LOW DROP VOLTAGE REGULATOR, with built-in ON/OFF Control Terminal. The transistors are used to drive the 3.3V signal from the ESP8266 to 5V for it to be able to control the relays. Preparing the Software Download Node.js here. The installation procedure depends on your operating system. To test if Node.js has been installed properly, you should be able to run these commands and display the current version. $ node -v $ npm -v Install Ionic Framework from here. Ionic Framework is dependent with node.js, so you must install it first. In setting up the Arduino IDE for ESP8266, you can go to my previous article here. Diving into the code There are three code modules which are the MQTT Client + REST API Server, ESP8266 Arduino, and the Ionic Mobile App Framework. You can get the codes in these github repos. REST API Server + MQTT Client - https://github.com/vynci/MQTT-REST-API ESP8266 Arduino - https://github.com/vynci/esp8266-relay Ionic Mobile App - https://github.com/vynci/esp8266-ionic REST API Server + MQTT Client This first module is the server that has been deployed to heroku (http://esp8266-relays.herokuapp.com). You can create your own server locally or by deploying it in the cloud. This node application requires two modules, Hapi.js is a REST API framework while MQTT.js is an mqtt client. This block initializes the REST API server, as well as establishes a connection with the MQTT broker. var Hapi = require('hapi'); var mqtt = require('mqtt'); var server = new Hapi.Server(); var port = Number(process.env.PORT || 4444); server.connection({ port: port, routes: { cors: true } }); var client = mqtt.connect('mqtt://test.mosquitto.org:1883'); This function is for publishing messages to the broker. var mqttPublish = function (topic, msg) { client.publish(topic, msg, function () { console.log('msg sent: ' + msg); }); }; This block creates a route for the ‘/device/control’ POST Method, wherein if this route is being called it will execute the mqttPublish function. The ‘deviceInfo’ variable contains the message for the ESP8266 to translate, wherein ‘dev1-on’ turns the relay 1 on, ‘dev1-off’ off and same thing for ‘dev2-on’ and ‘dev2-off’. server.route([ { method: 'POST', path: '/device/control', handler: function (request, reply) { var deviceInfo = 'dev' + request.payload.deviceNum + '-' + request.payload.command; reply(deviceInfo); mqttPublish('device/control', deviceInfo, { qos: 2 }); } } ]); server.start(); The first parameter in the mqttPublish function ‘device/control’ is the topic wherein our ESP8266 listens to, then the second parameter is where the message ‘deviceInfo’ is being passed to. The ‘qos’ means quality of service. It is a level of agreement between sender and receiver of a message regarding the guarantees of delivering a message. To know more about it, you can read it here. After you’ve downloaded the node app from this github repo, you can run it by: $ npm install $ node index.js This creates a REST API server wherein the mobile application can connect to. This also establishes a connection with the MQTT Broker(test.mosquitto.org). You can follow this tutorial from heroku if you want to deploy your own server in the cloud. ESP8266 Arduino Code This code block connects the ESP8266 to the wifi network by specifying the SSID and password. This block also establishes a connection with the MQTT broker. #include <PubSubClient.h> #include <ESP8266WiFi.h> const char* ssid = \"your-wifi-ssid\"; const char* password = \"your-wifi-passwd\"; char* topic = \"device/control\"; char* server = \"85.119.83.194\"; // IP of test.mosquitto.org WiFiClient wifiClient; PubSubClient client(server, 1883, callback, wifiClient); ..... To flash this code to the ESP8266 using the Arduino IDE, you can follow the steps here in my previous article. Ionic - Mobile App This file(services.js) right here connects to the REST API server, doing a POST method containing the command information in the payload. angular .module('starter.services', []) .factory('Devices', function ($http) { var ipServer = 'http://esp8266-relays.herokuapp.com'; return { deviceCommand: function (data) { console.log(data); return $http.post(ipServer + '/device/control', data); } }; }); You can run this mobile app through your browser by executing the command in your project’s root folder: $ ionic serve If you want to build and install it on your mobile device you can run: $ ionic platform add android $ ionic run android I’m not going to explain the process of installing the necessary libraries to build android/ios apps. You can follow the instructions here in the documentation guide on Ionic Framework’s website. Conclusion This article explains a basic construction of an Internet of Things(IoT) Device which connects to an MQTT broker and listens to a channel for incoming data through the Node.js REST API server. The mobile application then connects to the server, which enables it to send commands to the ESP8266 then into the Relays. This implementation is for education purpose only, and does not contain any Authorization and Authentication layers hence it is not secured. There are a lot of things that could still be improved. For instance, channeling the MQTT through Websockets instead of HTTP. Instead of using relays, you can use TRIACS which is more safer and efficient on the long run. And by adding an admin dashboard for the ESP8266 side, wherein you can add a form for a dynamic saving of WIFI SSID and Password so that you wouldn’t need to re-program the chip just to change the WIFI credentials. The ESP8266 is very cheap yet a very powerful wifi module. You can do a lot with it, this article just shows a “Hello World” equivalent application. I hope you’ve learned a lot with this article, and build your own awesome IoT device!"
+  },
+  "robot-camera-video-stream-using-aws-kvs": {
+    "headings": [
+      {
+        "depth": 2,
+        "id": "overview"
+      },
+      {
+        "depth": 3,
+        "id": "recap"
+      },
+      {
+        "depth": 3,
+        "id": "source-code"
+      },
+      {
+        "depth": 2,
+        "id": "architecture"
+      },
+      {
+        "depth": 2,
+        "id": "hardware"
+      },
+      {
+        "depth": 3,
+        "id": "schematic"
+      },
+      {
+        "depth": 3,
+        "id": "camera"
+      },
+      {
+        "depth": 3,
+        "id": "raspberry-pi-connection"
+      },
+      {
+        "depth": 2,
+        "id": "setup"
+      },
+      {
+        "depth": 3,
+        "id": "install-linux-libraries"
+      },
+      {
+        "depth": 3,
+        "id": "download-kvs-sdk"
+      },
+      {
+        "depth": 3,
+        "id": "building-the-aws-kvs-sdk"
+      },
+      {
+        "depth": 3,
+        "id": "setting-the-aws-environment-variables"
+      },
+      {
+        "depth": 3,
+        "id": "create-a-stream-on-kvs"
+      },
+      {
+        "depth": 3,
+        "id": "testing-the-video-stream"
+      },
+      {
+        "depth": 2,
+        "id": "integrating-with-nodejs"
+      },
+      {
+        "depth": 2,
+        "id": "frontend"
+      },
+      {
+        "depth": 3,
+        "id": "environment-setup"
+      },
+      {
+        "depth": 3,
+        "id": "aws-kvs-client-connection"
+      },
+      {
+        "depth": 3,
+        "id": "status-monitor"
+      },
+      {
+        "depth": 3,
+        "id": "integration"
+      },
+      {
+        "depth": 3,
+        "id": "testing-the-ionic-app"
+      },
+      {
+        "depth": 2,
+        "id": "summary"
+      }
+    ],
+    "readingTime": "17 min read",
+    "date": "2023-10-14",
+    "description": "This is the second part of the project that tackles on sending a peer-to-peer video stream from the rover’s onboard camera into our frontend mobile application using WebRTC and AWS Kinesis Video Stream (KVS) as the Signaling Server.",
+    "text": "class=\"prose dark:prose-invert\">Overview This is the second part of the project that tackles on sending a peer-to-peer video stream from the rover’s onboard camera into our frontend mobile application using WebRTC and AWS Kinesis Video Stream (KVS) as the Signaling Server. Recap In Part 1, we have covered how to build a rover and control the motors over the internet using MQTT. We also got into the frontend (UI/UX) side of things, wherein we used React with the Ionic framework to create a mobile application with the joystick library to control the steering. If you haven’t read the first part yet, I suggest going through it to get an overview. Source Code If you want to dive right away into the code for this article, you can check it out here: Rover Hardware (branch -> rovy-part-2) Mobile App (branch -> rovy-part-2) I will be pushing updates to the repositories as I add more things (i.e sensors) into the rover as I progress in the future, so the main branch might look different by the time you are reading this. As for this article, please refer to the specified branch. Architecture The diagram below illustrates the high-level view of the system’s workflow on streaming video from the rover’s camera to the mobile application via WebRTC. This article leans a lot into WebRTC, you can go through the fundamentals to get an overview of the peer-to-peer concept. Hardware In this part of the project, we’ll be focusing on two components which are the Raspberry Pi and Camera. Schematic We simply connect our Camera directly into the Raspberry Pi through the Camera Serial Interface (CSI) Camera The camera that we will be using is the Raspberry Pi Camera Module 2. The v2 Camera Module has a Sony IMX219 8-megapixel sensor (compared to the 5-megapixel OmniVision OV5647 sensor of the original camera). You can read all the gory details about IMX219 and the Exmor R back-illuminated sensor architecture on Sony’s website, but suffice to say this is more than just a resolution upgrade: it’s a leap forward in image quality, colour fidelity, and low-light performance. It supports 1080p30, 720p60, and VGA90 video modes, as well as still capture. Raspberry Pi connection The connection between the camera and Raspberry Pi is simple, it attaches via a 15cm ribbon cable to the CSI port on the Raspberry Pi. The camera works with all models of Raspberry Pi 1 to 5. It can be accessed through the MMAL and V4L APIs, and there are numerous third-party libraries built for it. Setup The operating system we have on this project is a Raspbian (Buster). The very first thing we need to do is enable the Camera Interface. In our terminal, we enter: $ sudo raspi-config Once you are inside the raspi-config user interface. Go to [3] Interface Options. Select the [P1] Camera and press the Enter key to enable the camera serial interface Install linux libraries For us to be able to stream the video data from the camera into the aws-kvs-sdk we need to install the necessary gstreamer libraries On the terminal, we have to do an apt-get: $ sudo apt-get install libssl-dev libcurl4-openssl-dev liblog4cplus-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gstreamer1.0-plugins-base-apps gstreamer1.0-plugins-bad gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly gstreamer1.0-tools By default pkg-config and CMake are installed in Raspbian, if not then you also need to install these and a build environment. Download KVS SDK The next step is to download the sdk from the awslabs github repository. git clone --recursive https://github.com/awslabs/amazon-kinesis-video-streams-webrtc-sdk-c.git Building the AWS KVS SDK We need to create a build directory in the newly checked out repository, and execute CMake from it. $ mkdir -p amazon-kinesis-video-streams-webrtc-sdk-c/build; cd amazon-kinesis-video-streams-webrtc-sdk-c/build; cmake .. To build the library and the provided samples run make in the build directory you executed CMake. $ make The build will take a while to complete, so get yourself a coffee while waiting 😉 Setting the AWS environment variables On our Raspberry Pi terminal, we need to run: $ export AWS_ACCESS_KEY_ID= <AWS account access key> $ export AWS_SECRET_ACCESS_KEY= <AWS account secret key> $ export AWS_DEFAULT_REGION= <AWS region> For the IAM User, we are going to set the permission on the action field as a wildcard * for now. We can add a more strict security later on. { \"Version\": \"2012-10-17\", \"Statement\": [ { \"Effect\": \"Allow\", \"Action\": \"kinesisvideo:*\", \"Resource\": \"arn:aws:kinesisvideo:<region>:<acct_id>:stream/test-stream/<acct_id>\" } ] } Create a stream on KVS The next step we need to do is to create a stream on AWS side. On the AWS Console, we need to go to Kinesis Video Stream, then Video streams, then click on Create video stream button. And we’ll be prompted with this page: We can input any name we want for the video stream (it must be unique). We’ll just select the Default configuration on the KMS configuration for now. We can also add tags as an option. Testing the video stream In the build folder, go to samples, then run kvsWebrtcClientMasterGstSample $ ./kvsWebrtcClientMasterGstSample <channelName> In our case, we have test-stream as the channel name of the KVS stream. $ ./kvsWebrtcClientMasterGstSample test-stream The output in the terminal would look this: In this part, we can already do a quick test if the video transmission actually works. We can go to the KVS WebRTC Test Page, which is a sample browser client that AWS has developed. You can also spin this up locally by pulling the repository from here. You will initially be prompted with the AWS region, credentials, and other options, but it should be quick and easy to get started. Integrating with Nodejs Now that we are assured that our camera and sdk are working properly with the video transmission to AWS KVS, the next thing we need to do is to make it run along with our motor controller Nodejs code. I copied kvsWebrtcClientMasterGstSample executable file that we built earlier into a directory ~/rovy-cam (It can be any directory you want). In the code, I added a child process that will execute the kvs client. const { spawn } = require('child_process'); const kvsClient = spawn('/home/pi/rovy-cam/kvsWebrtcClientMasterGstSample', ['test-stream']); kvsClient.stdout.on('data', (data) => { console.log(`stdout: ${data}`); }); kvsClient.stderr.on('data', (data) => { console.error(`stderr: ${data}`); }); This will also give us an event listener that will enable us to monitor the logs of the incoming KVS responses. Managing the stream startup during boot would also now be easier, as we are managing everything in one place. Frontend We will now proceed with the “Viewer” end of the video stream, which we will append to the mobile app that we have developed from Part 1. The concept that we are implementing here will be similar to the KVS WebRTC Test Page that we used earlier to test the video stream. Environment setup In our frontend mobile app’s code base, we need to install these libraries. $ npm install @aws-sdk/client-kinesis-video @aws-sdk/client-kinesis-video-signaling amazon-kinesis-video-streams-webrtc In Part 1, there is a more detailed discussion on how the frontend has been setup with Ionic and React. AWS KVS Client connection We’ll create a react component called KinesisWebRTC, and import the libraries that we just installed. import { KinesisVideoClient, DescribeSignalingChannelCommand, GetSignalingChannelEndpointCommand } from '@aws-sdk/client-kinesis-video'; import { KinesisVideoSignalingClient, GetIceServerConfigCommand } from '@aws-sdk/client-kinesis-video-signaling'; import { SignalingClient } from 'amazon-kinesis-video-streams-webrtc'; I have created a constant object that would serve like an enum that we’ll be using later. const OPTIONS = { TRAVERSAL: { STUN_TURN: 'stunTurn', TURN_ONLY: 'turnOnly', DISABLED: 'disabled' }, ROLE: { MASTER: 'MASTER', VIEWER: 'VIEWER' } }; I have also intially defined here the configuration needed to connect into AWS KVS. const state: any = store({ accessKey: process.env.AWS_ROVY_KEY, secretAccessKey: process.env.AWS_ROVY_SECRET, sessionToken: '', region: process.env.AWS_ROVY_REGION, role: OPTIONS.ROLE.VIEWER, channelName: 'test-stream', clientId: getRandomClientId(), endpoint: null, natTraversal: OPTIONS.TRAVERSAL.STUN_TURN, useTrickleICE: true, playerIsStarted: false, signalingClient: null, remoteView: null, peerConnectionStatsInterval: null, peerConnectionByClientId: {} }); I am using react-easy-state for now to manage the states. I might refactor this in the future to just only use the native useState. This will be our component for the video player. Which is a <video> embed element. const VideoPlayers = view(() => { return ( <> <div id=\"video-players\"> <video style={{ width: '100vw', height: '100vh', objectFit: 'cover', position: 'fixed', top: 0, left: 0 }} ref={state.remoteView} autoPlay playsInline muted /> </div> </> ); }); The entry point for the KinesisWebRTC is the code block below: const KinesisWebRTC = view(({ setKvsStatus }) => { state.remoteView = useRef(null); setStatus = setKvsStatus; useEffect(() => { startPlayer(); }, []); return <>{state.playerIsStarted ? <VideoPlayers /> : null}</>; }); function startPlayer() { state.playerIsStarted = true; startPlayerForViewer(); } The function startPlayerForViewer() handles all the signaling workflow between the browser, AWS KVS, and the Rover. async function startPlayerForViewer() { const kinesisVideoClient = new KinesisVideoClient({ region: state.region, endpoint: state.endpoint || null, credentials: { accessKeyId: state.accessKey, secretAccessKey: state.secretAccessKey, }, }); const describeSignalingChannelCommand = new DescribeSignalingChannelCommand({ ChannelName: state.channelName, }); const describeSignalingChannelResponse: any = await kinesisVideoClient.send( describeSignalingChannelCommand ); ... Status monitor To monitor and display the connection status in the UI, we have added here setStatus() that will set the global state into our StatusMonitor component. state.signalingClient.on('iceCandidate', (candidate: any) => { setStatus('connected'); state.peerConnection.addIceCandidate(candidate); }); state.signalingClient.on('close', () => { setStatus('disconnected'); }); state.signalingClient.on('error', (error: any) => { setStatus('error'); }); state.peerConnection.addEventListener('icecandidate', ({ candidate }: any) => { if (candidate) { if (state.useTrickleICE) { state.signalingClient.sendIceCandidate(candidate); } } else { setStatus('waitingForHost'); if (!state.useTrickleICE) { state.signalingClient.sendSdpOffer(state.peerConnection.localDescription); } } }); ... Integration After importing our KinesisWebRTC component, this how our Home.tsx would look like now together with the JoystickControllers and StatusMonitor. import { IonContent, IonPage } from '@ionic/react'; import KinesisWebRTC from '../components/KinesisWebRTC'; import JoystickControllers from '../components/JoystickControllers'; import StatusMonitor from '../components/StatusMonitor'; import './Home.css'; import { useState } from 'react'; const Home: React.FC = () => { const [mqttStatus, setMqttStatus] = useState<string>('pending'); const [kvsStatus, setKvsStatus] = useState<string>('pending'); return ( <IonPage> <IonContent class=\"main-content\" fullscreen> <JoystickControllers setMqttStatus={setMqttStatus} /> <StatusMonitor mqttStatus={mqttStatus} kvsStatus={kvsStatus} /> <KinesisWebRTC setKvsStatus={setKvsStatus}></KinesisWebRTC> </IonContent> </IonPage> ); }; export default Home; Testing the Ionic App Once everything is in place, npm libraries are installed, KVS stream is running, then we can run: $ ionic serve This will run a web server instance (live reload) that you can test and develop with. Summary In this article, we have covered the video streaming part of the rover’s camera. We used the amazon-kinesis-video-streams-webrtc-sdk-c library on the Raspberry Pi side to stream the video to AWS Kinesis. On the frontend side, we have added a new component called KinesisWebRTC that uses the @aws-sdk/client-kinesis-video, @aws-sdk/client-kinesis-video-signaling, and amazon-kinesis-video-streams-webrtc libraries to handle the WebRTC connection and video player rendering. I hope you enjoy reading this, and stay tuned for the upcoming updates of this project. Thank you!"
+  },
+  "robot-control-using-aws-iot-core": {
+    "headings": [
+      {
+        "depth": 2,
+        "id": "overview"
+      },
+      {
+        "depth": 2,
+        "id": "architecture"
+      },
+      {
+        "depth": 2,
+        "id": "hardware"
+      },
+      {
+        "depth": 3,
+        "id": "schematic"
+      },
+      {
+        "depth": 3,
+        "id": "chassis"
+      },
+      {
+        "depth": 3,
+        "id": "motor-driver"
+      },
+      {
+        "depth": 3,
+        "id": "raspberry-pi-as-the-control-board"
+      },
+      {
+        "depth": 3,
+        "id": "power-supply"
+      },
+      {
+        "depth": 2,
+        "id": "software-motor-controls"
+      },
+      {
+        "depth": 3,
+        "id": "send-serial-data-using-nodejs-serialport"
+      },
+      {
+        "depth": 2,
+        "id": "remote-control-via-mqtt"
+      },
+      {
+        "depth": 3,
+        "id": "mqtt-broker"
+      },
+      {
+        "depth": 3,
+        "id": "aws-iot-core"
+      },
+      {
+        "depth": 3,
+        "id": "connectivity"
+      },
+      {
+        "depth": 2,
+        "id": "frontend"
+      },
+      {
+        "depth": 3,
+        "id": "environment-setup"
+      },
+      {
+        "depth": 3,
+        "id": "mqtt-client-connection"
+      },
+      {
+        "depth": 3,
+        "id": "joystick-ui"
+      },
+      {
+        "depth": 3,
+        "id": "status-monitor"
+      },
+      {
+        "depth": 3,
+        "id": "testing-the-ionic-app"
+      },
+      {
+        "depth": 3,
+        "id": "building-into-ios-or-android"
+      },
+      {
+        "depth": 2,
+        "id": "summary"
+      }
+    ],
+    "readingTime": "20 min read",
+    "date": "2023-10-07",
+    "description": "This is the first part of the project which focuses on controlling the motors on a rover over the internet via MQTT. This article covers the hardware and software that make the whole system work.",
+    "text": "class=\"prose dark:prose-invert\">Overview This is the first part of the project which focuses on controlling the motors on a rover over the internet via MQTT. This article covers the hardware and software that make the whole system work. If you want to dive right away into the code, you can check it out here: Rover Hardware (branch -> rovy-part-1) Mobile App (branch -> rovy-part-1) I will be pushing updates to the repositories as I add more things (i.e video stream) into the rover as I progress in the future, so the main branch might look different by the time you are reading this. As for this article, please refer to the specified branch. Architecture This diagram illustrates the high level view of the system’s workflow on motor control. Hardware The hardware comprises three main parts, which are the Chassis, Motor Driver, Control Board (Raspberry Pi), and Power supply. Schematic An overview of how the hardware components are connected. Chassis The chassis is composed of the frame, wheels, and motors. This is a 4-wheel drive aluminum kit that I got from Lynxmotion, and it was really easy to assemble. It has excellent traction and there is plenty of room inside for additional electronics. It includes a 12VDC motor with a 200rpm, 0.78Kg-cm GHM-16 w/ rear shaft. You can find out about the whole kit in detail here. Motor driver As for the motor driver, ​​I am using the Sabertooth Dual 12A 6V-24V Regenerative Motor Driver which is the new version of the Sabertooth 2x10 motor controller. It is one of the most versatile, efficient, and easy-to-use dual motor drivers on the market. It is suitable for medium-powered robots - up to 30 lbs in combat or 100 lbs for general-purpose robotics. Out of the box, the Sabertooth can supply two DC brushed motors with up to 12A each. Peak currents of 25A are achievable for a few seconds. Sabertooth allows you to control motors with analog voltage, radio control, serial, and packetized serial. It has independent and speed+direction operating modes, making it the ideal driver for differential drive (tank style) robots. Raspberry Pi as the control board To control the motors in the robot, we’ll need a computing device that can translate commands through UART (serial). We can easily do this with a microcontroller (i.e. Arduino), but in this situation, I choose a Raspberry Pi because later on I will be adding a camera that would allow us to easily stream video feeds from the robot. On this project, I’m using a Raspberry Pi 4. Lower versions of this would also work. Power supply I used a Lithium-ion battery pack as it is lightweight, can handle inductive loads, and fast to charge. I got this battery bank module (72W 100WH) from Amazon that already has a 5V/2A and 12V/6A output, in which I did some few modifications that would enable me to extend the on/off switch outside the enclosure. Software (Motor controls) We’ll now be switching into the software side of things. If you want to skip directly into the source code, you can check it out here Send serial data using Nodejs (serialport) The Sabertooth Motor driver can be controlled using PWM or serial (UART TTL). We’ll be using serial control as the PWM output for the Raspberry Pi is limited. The serial output from the Sabertooth will be connected to the RPi’s GPIO 14 (TXD). I’m using Nodejs as the runtime environment and the NPM module serialport to interface with the Motor Driver. Assuming you already have Nodejs installed on your system. We’ll now do an npm install for the library serialport. $ npm install serialport And on our code side, We initialize the serial port with the serial path and baud rate. By default, the path on my RPi’s serial is on /dev/ttyS0. This might change on different situation. And the baud rate of the Sabertooth is 9600 const { SerialPort } = require('serialport'); const port = new SerialPort({ path: '/dev/ttyS0', baudRate: 9600 }); Then we’ll need to write a function that will send serial data into the port. const portWrite = async (data) => { return new Promise((resolve, reject) => { port.write(Buffer.from([data]), function (err) { if (err) { reject(err.message); } resolve(true); }); }); }; Then we’ll need to add a listener for when the port is open and ready to use. port.on('open', async function () { console.log('serial port ready'); }); To test our motor driver, we’ll send a command (once serial port is open) that will run the motors in the same direction and maximum speed. port.on('open', async function () { await portWrite(127); await portWrite(255); }); This is the serial bytes (in decimals) that we send to the Sabertooth Motor driver to achieve the desired direction and speed. Motors A - reverse: 1, stop: 64, forward: 127 Motors B - reverse: 128, stop: 192, forward: 255 So if we want the Motors A to be in full forward we send 127, if 50% speed forward we send 96. Same theory goes as well with Motors B Now this differential in speed will allow us to steer the robot into our desired direction, this is called Differential Steering Remote control via MQTT Now that we can control the motors with serial using Nodejs. The next thing we need do is connect our current software to the cloud, that way we can remotely control our robot via the internet. And we will be using MQTT as the protocol for our communication. MQTT is a standard messaging protocol for the Internet of Things (IoT). It is designed as an extremely lightweight publish/subscribe messaging transport that is ideal for connecting remote devices with a small code footprint and minimal network bandwidth. You can read more about it here. MQTT Broker For us to be enable to communicate around MQTT we’ll need a broker. Now we can set up our own broker such as using Mosquitto or EMQX. But in this project, we’ll go for a serverless approach so we won’t have to maintain or pay (initially) for a computing cloud server, and this will also get us started quickly. AWS IoT Core The serverless approach we’ll be using is from AWS, the name of the service is called AWS IoT Core. This service lets you connect billions of IoT devices and route trillions of messages to AWS services without managing infrastructure. To start the integration, first we need to create a device on the AWS console and attach the required policies. Under AWS IoT, go to Manage then Things, and then click on Create things We’ll just select the Auto-generate option for now. After this, you’ll be asked to attach a policy, we can just initially use a wildcard * on the permissions. We can add a more strict security layer later on. Once the device creation is done, we need to download the certificates and keys as we’ll need this on the later steps for us to connect into the AWS IoT Core (MQTT Broker). From this list of files, We’ll be needing these 3 later on (so make sure to track this). Save it to our creds folder and rename it as: Device certificate -> cert.crt Private key -> private.key Amazon Root CA 1 -> ca.pem Last thing we need from AWS console is to grab the MQTT endpoint that we’ll need to connect into later. Under AWS IoT, go to Test, then click on the MQTT test client. You can also use this as a testing tool to publish/subscribe messages into topics. Connectivity Adding in the connection to AWS IoT Core in our project is easy and straightforward. First, we need to install an mqtt client library. $ npm install mqtt We are going to create the mqtt client by initiliazing with the endpoint, private key,certificate and CA that we got from the previous steps. const mqtt = require('mqtt'); const fs = require('fs'); const client = mqtt.connect(mqttEndpoint, { key: fs.readFileSync('./creds/private.key'), cert: fs.readFileSync('./creds/cert.crt'), ca: [fs.readFileSync('./creds/ca.pem')], protocolId: 'MQTT', protocolVersion: 5 }); Back on our index.js file, We have to add a listener for connect which enables us to trigger an event once the client is connected to the broker (AWS IoT Core). And we subscribe to the channel where our frontend side will publish later on. client.on('connect', () => { console.log('connected to mqtt broker'); client.subscribe(mqttMotorChannel, (err) => { if (!err) console.log(`subscribed to [${mqttMotorChannel}]`); }); }); Next is we create another listener for incoming mqtt messages. Whenever a new message comes in from the broker, we will then parse the data and send it to the motor driver through the serial port. client.on('message', async (topic, message) => { const procedures = motor.calculateValues(message.toString()); if (procedures?.length) { for (let step = 0; step < procedures.length; step++) { await portWrite(procedures[step]); } } }); Those are the things that we really need on our device (Raspberry pi) side. Next is we’ll need a user interface that will give us an ease to control the steering of the robot. Frontend On the user interface side, We’ll want to create a mobile app with javascript that can easily be built into both iOS and Android. I’ve looked into React Native, but there seems to be only a few support for AWS libraries. For now, I’m still going to use React but with Ionic Framework (Capacitor). If you don’t want to build it as a mobile app, then you can just use plain React (or any framework) for a web app. If you want to dive directly into the source code, get it here. Environment setup Initiating a project with Ionic is really easy, you can follow their documentation to get started. Once you have an Ionic project already setup, we’ll need to npm install a joystick component. There is a really good library for it called react-joystick-component. $ npm install react-joystick-component Next thing we need to install is the library for connecting into the AWS IoT Core (MQTT Broker). $ npm install aws-iot-device-sdk In the source code, I have created a component in JoystickControllers.tsx. It contains the logic for both the joystick and the MQTT client connection. MQTT client connection Connecting and consuming messages from MQTT is almost similar to what we have earlier on the Raspberry Pi (device) side. In the mqtt parameters we have: export const mqttConfig: any = { region: process.env.AWS_ROVY_REGION, host: process.env.AWS_ROVY_MQTT_ENDPOINT, clientId: 'rovy_' + Math.random().toString(16).substr(2, 8), protocol: 'wss', maximumReconnectTimeMs: 8000, accessKeyId: process.env.AWS_ROVY_KEY, secretKey: process.env.AWS_ROVY_SECRET, debug: true }; We need to make sure that the AWS IAM User we have for this, has the following minimum permissions: { \"Version\": \"2012-10-17\", \"Statement\": [ { \"Effect\": \"Allow\", \"Action\": [\"iot:Connect\", \"iot:Publish\", \"iot:Subscribe\", \"iot:Receive\"], \"Resource\": \"arn:aws:iot:us-east-1:xxx:thing/xxx\" } ] } Also, We need to publish on this MQTT channel. This is the channel that our device (Raspberry Pi) is listening into. export const mqttTopic = 'rovy/motor/c7de5c35-3882-48bc-bac6-f67fcf50da0f'; Joystick UI For the joystick component, There are a bunch of options that you can configure accordingly with looks and functionality. On this project, we’ll configure it this way. <Joystick baseColor=\"gray\" stickColor=\"lightgray\" size={125} move={steerControl} stop={steerStop} throttle={100} ></Joystick> The callback functions for move and stop are being handled here: const steerControl = (data: any) => { client.publish(mqttTopic, `${data.x},${data.y}`); }; const steerStop = (data: any) => { client.publish(mqttTopic, `0,0`); }; As you can see, everytime these functions are called, it publishes (sends) messages to the MQTT broker with the x,y data that we get from the joystick component, which we’ll be parsing on the Raspbery Pi side so that it can translate it to the motor driver. Status monitor Last thing we need to tackle is the status monitor component. This component will help us easily indicate if the connection with the MQTT is connected or disconnected. So on StatusMonitor.tsx we have a simple object that would map out the message and color of the indicator. const status: any = { pending: { color: 'orange', message: 'Connecting...' }, reconnect: { color: 'yellow', message: 'Reconnecting...' }, connected: { color: 'greenyellow', message: 'Connected' }, disconnected: { color: 'orangered', message: 'Disconnected' }, error: { color: 'orangered', message: 'Error' } }; This block here will then render the message on the top portion of the view. return ( <> <IonGrid class=\"status-container-top\"> <IonRow> <IonCol> <span>MQTT: </span> <span style={{ color: status[mqttStatus].color }}>{`${status[mqttStatus].message}`}</span> </IonCol> </IonRow> </IonGrid> </> ); The state mqttStatus is being set on the JoystickController component where our MQTT connection workflow happens. We then combine both of this components in the Home view. const Home: React.FC = () => { const [mqttStatus, setMqttStatus] = useState < string > 'pending'; return ( <IonPage> <IonContent class=\"main-content\" fullscreen> <JoystickControllers setMqttStatus={setMqttStatus} /> <StatusMonitor mqttStatus={mqttStatus} /> </IonContent> </IonPage> ); }; Testing the Ionic App Once everything is in place and npm libraries are installed, we can run: $ ionic serve This will run a web server instance (live reload) that you can test and develop with. Building into iOS or Android Building into iOS or Android is really easy with Ionic, as they have a platform that can do all the heavy lifting for you. Using Ionic Appflow, you won’t need to setup your local environment with like Android Studio or Xcode. You can checkout their documentation to link your git repository and do the whole CI/CD workflow from there. If you want to build on your local machine for iOS, you can check their step-by-step documentation here. For android, you can check it out here Summary In this article, we have covered on how we can build a rover and control it over the internet using MQTT. We also got into the frontend (UI/UX) side of things, wherein we have used React with Ionic framework. The next step would be to integrate a video stream into the rover, which will enable us to have a visual of the rover’s point of view. I hope you enjoy reading this, and stay tuned for the upcoming updates of this project. Thank you!"
+  },
+  "robot-sensors-4g-lte-modem": {
+    "headings": [
+      {
+        "depth": 2,
+        "id": "overview"
+      },
+      {
+        "depth": 3,
+        "id": "recap"
+      },
+      {
+        "depth": 3,
+        "id": "source-code"
+      },
+      {
+        "depth": 2,
+        "id": "architecture"
+      },
+      {
+        "depth": 2,
+        "id": "hardware"
+      },
+      {
+        "depth": 3,
+        "id": "4glte-modem"
+      },
+      {
+        "depth": 3,
+        "id": "temperature-and-humidity"
+      },
+      {
+        "depth": 3,
+        "id": "gps-module"
+      },
+      {
+        "depth": 3,
+        "id": "analog-sensors"
+      },
+      {
+        "depth": 4,
+        "id": "voltage-sensor"
+      },
+      {
+        "depth": 4,
+        "id": "ir-range-sensor"
+      },
+      {
+        "depth": 2,
+        "id": "rover-software"
+      },
+      {
+        "depth": 3,
+        "id": "4glte-qmi-setup"
+      },
+      {
+        "depth": 3,
+        "id": "4glte-signal-strength"
+      },
+      {
+        "depth": 3,
+        "id": "gps-serial"
+      },
+      {
+        "depth": 3,
+        "id": "bme280-i2c"
+      },
+      {
+        "depth": 3,
+        "id": "analog-sensors-via-ads1115"
+      },
+      {
+        "depth": 2,
+        "id": "frontend"
+      },
+      {
+        "depth": 3,
+        "id": "components"
+      },
+      {
+        "depth": 3,
+        "id": "integration"
+      },
+      {
+        "depth": 3,
+        "id": "testing-the-ionic-app"
+      },
+      {
+        "depth": 2,
+        "id": "summary"
+      }
+    ],
+    "readingTime": "21 min read",
+    "date": "2023-10-29",
+    "description": "We’re now moving on to the third phase of the project, which involves the integration of an onboard 4G/LTE modem to enable remote outdoor mobility. Additionally, a new set of sensors has been introduced for telemetry transmission via AWS IoT Core using MQTT.",
+    "text": "class=\"prose dark:prose-invert\">Overview We’re now moving on to the third phase of the project, which involves the integration of an onboard 4G/LTE modem to enable remote outdoor mobility. Additionally, a new set of sensors has been introduced for telemetry transmission via AWS IoT Core using MQTT. The testing also extends to outdoor conditions, providing valuable assessments of the data gathered from temperature, humidity, GPS (including coordinates, speed, and altitude), IR range, and battery voltage during the rover’s full-load operations. Recap In Part 2, we discussed the process of integrating the peer-to-peer video stream from the rover’s onboard camera into the mobile frontend application. This was achieved through the utilization of WebRTC and AWS Kinesis Video Stream (KVS) as the Signaling Server. Source Code If you want to dive right away into the code for this article, you can check it out here: Rover Hardware (branch -> rovy-part-3) Mobile App (branch -> rovy-part-3) I will be pushing updates to the repositories as I add more things into the rover as I progress in the future, so the main branch might look different by the time you are reading this. As for this article, please refer to the specified branch. Architecture The diagram below illustrates the high-level view of the whole system’s workflow. Hardware This schematic provides a high-level overview of the interconnections between the new hardware components and the Raspberry Pi. The 4G/LTE modem and GPS establish communication through USB, while the remaining sensors are linked via I2C. 4G/LTE modem The Quectel’s EC25 delivers maximum data rates up to 150 Mbps downlink and 50 Mbps uplink. Designed in the compact and unified form factor, EC25 series is compatible with Quectel multi-mode LTE Standard EC21 series/EC20-CE/EG25-G/EG21-G modules and UMTS/HSPA+ UC200A-GL module, which allows for flexible migration among them in design and manufacturing. Temperature and humidity The BME280 is the next-generation of sensors from Bosch, and is the upgrade to the BMP085/BMP180/BMP183 - with a low altitude noise of 0.25m and the same fast conversion time. It has the same specifications, but can use either I2C or SPI. This precision sensor from Bosch is the best low-cost sensing solution for measuring humidity with ±3% accuracy, barometric pressure with ±1 hPa absolute accuraccy, and temperature with ±1.0°C accuracy. GPS module The GT-U7 main module GPS module using the original UBLOX 7th generation chip, Software is compatible with NEO-6M. It is equipped with high sensitivity, low power consumption, miniaturization, its extremely high tracking sensitivity greatly expanded its positioning of the coverage. With a USB interface, it can directly connect with the RPI’s point of view positioning effect. It can be attached with an IPEX antenna interface. The default distribution of active antenna can be quickly positioned. Analog sensors Since the Raspberry Pi doesn’t have an onboard analog-to-digital converter we are adding in the ADS1115, which provides a 16-bit precision at 860 samples/second over I2C. The chip can be configured as 4 single-ended input channels or two differential channels. We will initially be using them to measure the analog output from the Voltage and IR Range sensors. Voltage sensor This module is based on a resistive divider principle design. A voltage divider is a passive linear circuit that produces an output voltage (Vout) that is a fraction of its input voltage (Vin). In our case, a ~12V from the battery will give us a proportionate value in ~5V range which the ADC (ADS1115) is able to recognize. IR Range sensor The Sharp distance sensors are a popular choice for many projects that require accurate distance measurements. This IR sensor is more economical than sonar rangefinders, yet it provides much better performance than other IR alternatives. Interfacing it is straightforward: the single analog output can be connected to an analog-to-digital converter for taking distance measurements, or the output can be connected to a comparator for threshold detection. The detection range of this version is approximately 10 cm to 80 cm (4″ to 32″). Rover Software 4G/LTE QMI Setup To enable our Raspberry Pi to communicate with the 4G/LTE modem and give internet connectivity to the rover, we’ll have to run a few commands that will install the QMI interface. In the RPi terminal, run the update and upgrade command. $ sudo apt update && sudo apt upgrade -y Install the driver for the 4G/LTE modem for mobile data connection (using QMI). $ wget https://raw.githubusercontent.com/sixfab/Sixfab_QMI_Installer/main/qmi_install.sh $ sudo chmod +x qmi_install.sh $ sudo ./qmi_install.sh At the end of installation, it will ask you to reboot the Raspberry Pi. Navigate to the Quectel files that were installed in the previous step. $ cd /opt/qmi_files/quectel-CM Now run the following command to connect to the Internet. $ sudo ./quectel-CM -s [YOUR APN] To check if we got everything right $ ping -I wwan0 -c 5 8.8.8.8 It should have an output like this: PING 8.8.8.8 (8.8.8.8) from 100.65.213.248 wwan0: 56(84) bytes of data. 64 bytes from 8.8.8.8: icmp_seq=1 ttl=110 time=222 ms 64 bytes from 8.8.8.8: icmp_seq=2 ttl=110 time=194 ms 64 bytes from 8.8.8.8: icmp_seq=3 ttl=110 time=193 ms 64 bytes from 8.8.8.8: icmp_seq=4 ttl=110 time=194 ms 64 bytes from 8.8.8.8: icmp_seq=5 ttl=110 time=195 ms --- 8.8.8.8 ping statistics --- 5 packets transmitted, 5 received, 0% packet loss, time 8ms rtt min/avg/max/mdev = 192.947/199.606/221.875/11.168 ms The next thing we need to do is to have the RPi connect automatically during startup via QMI interface. $ wget https://raw.githubusercontent.com/sixfab/Sixfab_QMI_Installer/main/install_auto_connect.sh $ sudo chmod +x install_auto_connect.sh $ sudo ./install_auto_connect.sh Run the install script we just downloaded. $ sudo ./install_auto_connect.sh It will ask again for the APN, once it is done we can check the status: $ sudo systemctl status qmi_reconnect.service If everything went well, it should have an active status. ● qmi_reconnect.service - QMI Auto Connection Loaded: loaded (/etc/systemd/system/qmi_reconnect.service; enabled; vendor preset: enabled) Active: active (running) since Fri 2021-01-29 12:15:25 GMT; 2min 4s ago Main PID: 2730 (sh) Tasks: 4 (limit: 3861) CGroup: /system.slice/qmi_reconnect.service ├─ 2730 /bin/sh /usr/src/qmi_reconnect.sh ├─13529 sudo ./quectel-CM -s super └─13530 ./quectel-CM -s super 4G/LTE Signal strength To get the signal strength that we get from the modem and antenna, we have to add this serial interface code into our nodejs instance. lteSerialPort.on('open', async () => { await ltePortWrite('AT+CSQ\\r\\n'); }); lteSerialParser.on('data', (data) => { data = data.toString(); if (data.includes('+CSQ:')) { data = data.replace('+CSQ: ', ''); telemetry.updateLTE = data; console.log('data', data); } }); The console.log will output something like 25,99. This means that we have received an RSSI of –63dBm and channel bit error rate is 99, this is an excellent signal strength, if the value is below 10,99 it means that the signal strength is poor. You can read more details on these possible values on the RSSI table here. GPS (Serial) For the GPS serial interface, we have also added a new serial port instance. const GPS = require('gps'); ... const gpsSerialParser = port.pipe(new ReadlineParser({ delimiter: '\\r\\n' })); gps.on('data', (data) => { if (gps.state.lat && gps.state.lon) { telemetry.updateGPS = { lat: { value: gps.state.lat }, lon: { value: gps.state.lon }, speed: { value: Math.round(gps.state.speed) }, track: { value: Math.round(gps.state.track), unit: '°' }, alt: { value: Math.rount(gps.state.alt), unit: 'm' } }; } }); gpsSerialParser.on('data', (data) => { if ( data.includes('$GPVTG') || data.includes('$GPGGA') || data.includes('$GPHDT') || data.includes('$GPRMC') ) gps.update(data); }); In the NMEA sentences, we are capturing the following protocols $GPVTG, $GPGGA, $GPHDT, and GPRMC. This will give us the latitude, longitude, speed, track and altitude that we will be sending over later on. BME280 (I2C) For the temperature and humidity sensor, we added this code block. bme280 .open({ forcedMode: true }) .then((sensor) => { setInterval((_) => { forcedRead(sensor).then((data) => { telemetry.updateTemperature = Math.round(data.temperature); telemetry.updateHumidity = Math.round(data.humidity); }); }, 15000); }) .catch(console.log); Analog sensors (via ADS1115) Lastly, we add this code block below to read the voltage from the battery and the distance measured from the IR range sensor. analogSensors.openPromisified(1).then(async (bus) => { const ads1115 = await ADS1115(bus); const full = 26480; setInterval(async () => { let value1 = await ads1115.measure('0+GND'); let value2 = await ads1115.measure('2+GND'); const batteryVoltage = (5 * (value2 / full)) / 0.2; const irRange = 5 * (value1 / full); telemetry.updateBattery = parseFloat(batteryVoltage.toFixed(2)); telemetry.updateRangeSensor = parseFloat(irRange.toFixed(4)); }, 1000); }); Frontend Components On the frontend side, we have a updated the StatusMonitor component to accomodate and display the sensor readings from the rover. <IonCol size=\"1\"> <span> <IonIcon icon={flash}></IonIcon> </span> <span style={{ color: status.connected.color, fontSize: 'small' }}> {sensorData.battery.voltage.value || 0} {sensorData.battery.voltage.unit} </span> </IonCol> ... <IonCol size=\"5\"> <span> <IonIcon icon={location}></IonIcon> </span> <span style={{ color: status.connected.color, fontSize: \"small\" }}> {sensorData.gps.lat.value || 0}, {sensorData.gps.lon.value || 0} </span> </IonCol> A new component GaugeControllers have been also added to display the speed that we get from the GPS module on the rover. const GaugeControllers: React.FC<ContainerProps> = ({ sensorData }) => { return ( <> <IonGrid class=\"gauge-container-bottom\"> <IonRow> <IonCol> <div style={{ fontSize: '4em', fontWeight: 'bold' }}> {sensorData.gps.speed.value || 0} </div> <div style={{ fontSize: '1.5em', fontWeight: 300 }}>km/h</div> </IonCol> </IonRow> </IonGrid> </> ); }; Lastly, there is also a new component called ProximityWarning. This is from the reading we get from the IR Range sensor, it will display a warning indicator if an object is within the set range, this is to avoid collisions. const ProximityWarning: React.FC<ContainerProps> = ({ sensorData }) => { return ( <> <IonGrid class=\"proximity-warning-container-bottom\"> <IonRow> <IonCol> {sensorData.range.ir.value > 1.5 ? ( <div style={{ fontSize: '6em', fontWeight: 'bold' }}> <IonIcon icon={handLeft}></IonIcon>{' '} </div> ) : ( '' )} </IonCol> </IonRow> </IonGrid> </> ); }; Integration By adding in the new components together, the Home View now looks like this: const Home: React.FC = () => { const [mqttStatus, setMqttStatus] = useState<string>('pending'); const [sensorData, setSensorData] = useState<any>(sensorDefaultValue); const [kvsStatus, setKvsStatus] = useState<string>('pending'); return ( <IonPage> <IonContent class=\"main-content\" fullscreen> <JoystickControllers setMqttStatus={setMqttStatus} setSensorData={setSensorData} /> <StatusMonitor mqttStatus={mqttStatus} kvsStatus={kvsStatus} sensorData={sensorData} /> <KinesisWebRTC setKvsStatus={setKvsStatus}></KinesisWebRTC> <GaugeControllers sensorData={sensorData}></GaugeControllers> <ProximityWarning sensorData={sensorData}></ProximityWarning> </IonContent> </IonPage> ); }; Testing the Ionic App Once everything is in place and npm libraries are installed, we can run: $ ionic serve This will run a web server instance (live reload) that you can test and develop with. Summary This article delves into the latest developments regarding the recently integrated onboard 4G/LTE modem and sensors. While we’ve conducted an outdoor test, it’s worth noting that further enhancements are required for the peer-to-peer video streaming via WebRTC. The forthcoming project steps will emphasize the enhancement of video feed stability and reduction of fragmentation to address this issue. At the moment, the sensor data stream we receive from the rover is primarily used for display purposes. The upcoming steps will involve harnessing this data to enhance the rover’s navigation system. I trust you find this article enjoyable, and I invite you to stay tuned for the forthcoming project updates. Thank you for your interest!"
+  },
+  "sending-data-to-outer-space-using-javascript": {
+    "headings": [
+      {
+        "depth": 2,
+        "id": "overview"
+      },
+      {
+        "depth": 2,
+        "id": "objective"
+      },
+      {
+        "depth": 2,
+        "id": "fundamentals"
+      },
+      {
+        "depth": 3,
+        "id": "sending-a-message-mo---mobile-originated"
+      },
+      {
+        "depth": 3,
+        "id": "receiving-a-message-mt---mobile-terminated"
+      },
+      {
+        "depth": 2,
+        "id": "circuit-diagram"
+      },
+      {
+        "depth": 2,
+        "id": "diving-into-the-code"
+      },
+      {
+        "depth": 2,
+        "id": "summary"
+      }
+    ],
+    "readingTime": "13 min read",
+    "date": "2022-10-22",
+    "description": "When deploying an IoT project in a remote or offshore area, getting Internet connectivity (4G/LTE) is difficult. One solution for this is to communicate with satellites. This article will demonstrate how to talk with the Iridium 9602/3 module via the serial port using Nodejs.",
+    "text": "class=\"prose dark:prose-invert\">Overview When deploying an IoT project in a remote or offshore area, getting Internet connectivity (4G/LTE) is difficult. One solution for this is to communicate with satellites. This article will demonstrate how to talk with the Iridium 9602/3 module via the serial port using Nodejs. We will be using the Iridium service called SBD. It is a bandwidth-limited messaging system, capable of transmitting packets of up to 340 bytes and receiving packets of 270 bytes. SBD is suitable for applications that need to regularly send or receive small amounts of information - typically these would include tracking, telemetry, system control, and monitoring applications. It is not suitable if very low latency is required, or if the data to be transmitted is larger than a few thousand bytes. Sending images or video files is usually not sensible. With a good view of the sky, it is possible to send/receive approximately once every 10 seconds. Objective In this quick demonstration, We want to interface with an Iridium 9602/3 modem via serial port. There are a lot of Iridium service providers such as Metocean and GroundControl. In this demo, we will be using the RockBlock modem from the company called GroundControl, and use an Arduino to temporarily buffer the data to a laptop (via USB). Our code in javascript will be able to send and receive satellite messages. If you are in a hurry, you can skip directly into the source code, you can check it out here. Fundamentals Before we dive into the actual code, let us first have an overview of how a message is transmitted and received. Sending a message (MO - Mobile Originated) The Iridium 9602 modem will send the data The satellites in outer space will then relay that data back to earth. Iridium ground stations will capture that data and then creates an event for the corresponding Cloud provider. You can now then perform further actions such as storing it on a database. Receiving a message (MT - Mobile Terminated) The satellite/s will send a Ring Alert to the Iridium 9602 on earth. The Iridium 9602 will check its inbox and download the queued message. Once the message is available, we can now then perform further actions on it. Circuit Diagram This is just a very simple wiring that enables our laptop (which only has USB connections) to communicate with the Iridium modem serially. If we have a RaspberryPi in hand, then we can discard the Arduino here and have the RPi talk to the Iridium modem directly. There is also a good tutorial on this from Adafruit, you can check it out here. Diving into the code Now that we are all set, we can prepare our dev environment. Assuming we already have Nodejs installed on our system. We install first these dependencies: $ npm install --save serialport @serialport/parser-readline Before we go into the code, let us first have a look at what the final output looks like, so if we pull the repository from Github, we can run: $ node index.js We can see here the steps on how the commands are sent. Now let’s get into the code. We initialize our code by specifying the serial path to where our Arduino is connected. const SerialPort = require('serialport'); const Readline = require('@serialport/parser-readline'); const port = new SerialPort('/dev/ttyAMA2', { baudRate: '19200' }); We also specified here the baud rate of the Iridium modem which is 19200. The communication with the Iridium modem uses AT Commands you can find out about it more here. The serial port can also just process one instance and one command at a time, so we created a queue here that handles that. const shiftATCommandQueue = (queueId, status, data) => { atCommandQueue.shift(); atCommandQueueEvent.emit(queueId, { status, data }); if (atCommandQueue.length) consumeATCommandQueue(); }; On the send method, we return a promise: const send = async (message, retries = 10, timeout = 120000) => { return new Promise((resolve, reject) => { const id = uuid.v4(); const timestamp = new Date().getTime(); sendMessageQueue.push({ id, message, retries, timeout, timestamp }); sendMessageQueueEvent.on(id, ({ status, data }) => { const response = { id, status, data }; if (status === 'resolve') resolve(response); else reject(response); sendMessageQueueEvent.removeListener(id); }); if (sendMessageQueue.length === 1) consumeSendMessageQueue(); }); }; To send a message to the satellite, we send the following AT commands to perform that: AT+SBDWT=Hello world! AT+SBDIX const sbdwtResult = await sendATCommand('AT+SBDWT\\r', 'READY'); const messageResult = await sendATCommand(queue.message + '\\r'); const sbdix = await sbdixExecute(queue.retries); If all goes well and there is a clear view of the sky, it should now be able to send the message. the AT+SBDIX command returns a set value that represents the MO and MT status. You can read more about it here. We handle that response through this parsing method here: const parseSBDIX = (str) => { let result = { MOStatus: '', MOMSN: '', MTStatus: '', MTMSN: '', MTLength: '', MTqueued: '', isValid: false }; if (str.includes('+SBDIX:')) { const keyValue = str.split(' '); result = { MOStatus: parseInt(keyValue[1].replace(',', '')), MOMSN: parseInt(keyValue[2].replace(',', '')), MTStatus: parseInt(keyValue[3].replace(',', '')), MTMSN: parseInt(keyValue[4].replace(',', '')), MTLength: parseInt(keyValue[5].replace(',', '')), MTqueued: parseInt(keyValue[6].replace(',', '')), isValid: true }; } return result; }; If we go to index.js we can see an abstract way of sending the message. for (let i = 0; i < numberOfSatMessages; i++) { iridium .send(`Hello_Earth_${i + 1}`) .then((res) => { console.log('[OK] Send message', res); }) .catch((err) => { console.log('[ERROR] Send message', err); }); } To receive incoming satellite messages, we handle that on the serial parser listener block. parser.on('data', async (data) => { let isExpectedData = false; if (data.includes('SBDRING')) downloadMessage(); ... If we receive an SBDRING in the serial port, then we execute the downloadMessage() function. const downloadMessage = async () => { const sbdix = await sbdixExecute(15, true); await checkInbox(sbdix.parsedSBDIX); }; const checkInbox = async (parsedSBDIX) => { let result = { message: '', isEmpty: true, sbdix: parsedSBDIX }; const mailTimeout = setTimeout(() => { return result; }, 1 * 60000); if (parseInt(parsedSBDIX.MOStatus) < 4 && parseInt(parsedSBDIX.MTStatus) > 0) { const sbdrtResult = await sendATCommand('AT+SBDRT\\r', '+SBDRT:', true); result.message = sbdrtResult.data; result.isEmpty = false; sbd.emit('message', result.message); if (parsedSBDIX.MTqueued > 0) { downloadMessage(); } } clearTimeout(mailTimeout); return result; }; Once a message is available, we trigger an emit to the event. Let’s go back into index.js to see this in action. iridium.sbd.on('message', (message) => { console.log('Received:', message); }); In a cloud provider for iridium services such as Rock7 (RockBlock), you can add some webhooks to listen for messages coming remotely from the Iridium Modem, you can check that further here. At the same time, they also have APIs that could enable you to send messages from the cloud into the Iridium Modem, you can check that further here. That’s it! you have now a working satellite transmitter and receiver using javascript (Nodejs). You can check out the whole source code here. Summary We have been able to learn here the fundamentals of how the data is being passed around in satellite transmission. We have also been able to learn how to connect and talk with the Iridium 9602 modem. We have used javascript (Nodejs) as the language to send the AT commands as well as receive serial data to handle the ring alerts when have incoming messages. There are still a lot of improvements we can add to this code base to make it more production ready. But in the meantime, we can use this as a stepping stone on how we can create an IoT project that would still be able to communicate to the internet even with the absence of a 4G/LTE signal."
+  },
+  "serverless-rest-api-with-aws-gateway-lambda-dynamodb": {
+    "headings": [
+      {
+        "depth": 2,
+        "id": "overview"
+      },
+      {
+        "depth": 2,
+        "id": "tech-stack"
+      },
+      {
+        "depth": 3,
+        "id": "serverless-framework"
+      },
+      {
+        "depth": 3,
+        "id": "nodejs"
+      },
+      {
+        "depth": 3,
+        "id": "aws-lambda"
+      },
+      {
+        "depth": 3,
+        "id": "aws-dynamodb"
+      },
+      {
+        "depth": 2,
+        "id": "diving-into-the-code"
+      },
+      {
+        "depth": 3,
+        "id": "clone-the-repository"
+      },
+      {
+        "depth": 3,
+        "id": "install-and-start-testing-the-application"
+      },
+      {
+        "depth": 3,
+        "id": "dissecting-serverlessyml"
+      },
+      {
+        "depth": 3,
+        "id": "lambda-function-handler"
+      },
+      {
+        "depth": 3,
+        "id": "response-handler"
+      },
+      {
+        "depth": 2,
+        "id": "deployment"
+      },
+      {
+        "depth": 2,
+        "id": "summary"
+      }
+    ],
+    "readingTime": "10 min read",
+    "date": "2022-03-09",
+    "description": "There are a bunch of ways to build a REST API, and this article here shows one of those ways. We will be building a serverless backend, so we won’t have to worry about setting up and maintaining the infrastructure, which could include load-balancing, horizontal scaling, security, etc. This implementation also includes log monitoring (through AWS CloudWatch).",
+    "text": "class=\"prose dark:prose-invert\">Overview There are a bunch of ways to build a REST API, and this article here shows one of those ways. We will be building a serverless backend, so we won’t have to worry about setting up and maintaining the infrastructure, which could include load-balancing, horizontal scaling, security, etc. This implementation also includes log monitoring (through AWS CloudWatch). If you want to get started right away, you can check out the github repository of this project here. Tech stack These will be the major technology that we will be using in this project. Serverless Framework It is a free and open-source web framework written using Node.js. Serverless is the first framework developed for building applications on AWS Lambda, a serverless computing platform provided by Amazon as a part of Amazon Web Services. NodeJs It is an open-source, cross-platform, back-end JavaScript runtime environment that runs on the V8 engine and executes JavaScript code outside a web browser. AWS Lambda It is an event-driven, serverless computing platform provided by Amazon as a part of Amazon Web Services. It is a computing service that runs code in response to events and automatically manages the computing resources required by that code. AWS Dynamodb It is a fully managed proprietary NoSQL database service that supports key–value and document data structures and is offered by Amazon.com as part of the Amazon Web Services portfolio. DynamoDB exposes a similar data model to and derives its name from Dynamo, but has a different underlying implementation. Diving into the code You can follow along with the source code, it is available here. Clone the repository $ git clone https://github.com/vynci/serverless-rest-api.git Install and start testing the application $ npm install $ npm start This will try to run a local DynamoDB simulator, and host the CRUD rest API via nodejs locally. Dissecting serverless.yml Here we define all the configurations for the serverless framework to orchestrate into. service: name: todo-api-template This part right here just defines the name of the service. This will also be the prepend name for the lambda function generated at a later time. plugins: - serverless-webpack - serverless-dynamodb-local - serverless-offline These are the serverless-related plugins that are going to be used in both development and deployment. For now, we are using the webpack, dynamodb-local and serverless-offline. custom: stage: '${opt:stage, self:provider.stage}' dynamodb: start: port: 8000 inMemory: true migrate: true migration: dir: offline/migrations In the custom part, this is where the custom variables are defined, one example is the dynamodb local definitions on which port it will be exposed and the directory of the migration. provider: name: aws runtime: nodejs14.x stage: dev region: ap-southeast-1 stackTags: ${file(tags.yml):${opt:stage}.stack} environment: ${file(env.yml):${self:custom.stage}} iamRoleStatements: - Effect: Allow Action: - dynamodb:Query - dynamodb:Scan - dynamodb:GetItem - dynamodb:PutItem - dynamodb:BatchWriteItem - dynamodb:UpdateItem - dynamodb:DeleteItem Resource: 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.todoTable}' In the `provider“ section, we define here the following: The version of nodejs we are going to use in the lambda runtime The AWS region where this instance is going to be deployed The directory of the environment variables The AWS IAM Role statements, which sets the permissions of the resources that is going to be used (i.e Dynamodb) functions: getTodo: handler: src/todo/handler.getTodo memorySize: 1024 timeout: 30 events: - http: method: get path: todo/{id} cors: true ... In the functions section, we define here the actual lambda functions that are going to be deployed in the cloud. We set here the path of the handler (function), the memory size, timeout, and events that it will be triggered by, which is in this case is the http (AWS API Gateway). Lambda function handler These are the function codes that are going to be deployed in AWS lambda. Each of the functions defines each of the CRUD actions. import { ok, serverError } from '../aws/response'; import * as todoRepo from './todoRepo'; // Create Todo Handler export const createTodo = async (event, context, cb) => { const payload = JSON.parse(event.body) || {}; let response; try { let data = await todoRepo.createTodo(payload); response = ok(data); } catch (ex) { let error = { message: 'Could not save to dynamoDB', description: ex.message }; console.log(error); response = serverError(error); } return cb(null, response); }; ... The source code of this project is written using a Repository Design Pattern. The logic on each handler is being abstracted from the ~/src/todo/todoRepo.ts import * as uuid from 'uuid/v1'; import { dynamodb } from '../aws/dynamodb'; const env = process.env; export const createTodo = async (payload: any): Promise<any> => { const id = uuid(); const params = { TableName: env.todoTable, Item: { id, userId: payload.userId, dateCreated: new Date().getTime(), dateUpdated: new Date().getTime(), content: payload.content, status: 'pending' }, ConditionExpression: '#id <> :id', ExpressionAttributeNames: { '#id': 'id' }, ExpressionAttributeValues: { ':id': id } }; try { // write the todo item to the database let result: any = await dynamodb.put(params).promise(); result = params.Item; return result; } catch (ex) { throw ex; } }; Response Handler We also need to create the response data for each of the API requests. Under the try-catch statement in handler.ts, these responses are being handled accordingly in ~/src/aws/response.ts const ok = (responseData) => { return { statusCode: 200, headers: { 'Access-Control-Allow-Origin': '*' }, body: typeof responseData === 'string' ? responseData : JSON.stringify(responseData) }; }; const serverError = (responseData) => { return { statusCode: 500, headers: { 'Access-Control-Allow-Origin': '*' }, body: typeof responseData === 'string' ? responseData : JSON.stringify(responseData) }; }; export { ok, serverError }; Deployment Now we have everything in place and once we are already confident about the code, we are now ready to deploy this REST API application. To do that we execute this serverless command: $ node --max-old-space-size=8192 ./node_modules/.bin/serverless deploy -s prod -v The -s prod parameter there defines in which environment we want to deploy this. I have set up here three resource environments (local, staging, and prod). Once everything is successful, this should already deploy the necessary AWS resources to the cloud via AWS CloudFormation. Summary In this article, we have created a very simple CRUD HTTP REST API that interacts with a database (AWS DynamoDB). We have implemented this backend in a “serverless” way. We can still improve this simple implementation forward by adding an auth layer for example. I hope this article helps you with an introduction to implementing a REST API through AWS serverless resources."
+  }
+}
