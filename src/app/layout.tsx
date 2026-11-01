@@ -17,7 +17,6 @@ export const metadata: Metadata = {
   applicationName: 'vynci.dev',
   authors: [{ name: site.name, url: `${site.url}/about` }],
   creator: site.name,
-  icons: { icon: '/favicon.png' },
   robots: { index: true, follow: true }
 }
 

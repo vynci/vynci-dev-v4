@@ -3,6 +3,7 @@
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { ImageResponse } from 'next/og'
+import { LogoMark, logoColor } from '@/components/LogoMark'
 
 export const ogSize = { width: 1200, height: 630 }
 export const ogContentType = 'image/png'
@@ -19,8 +20,6 @@ const fonts = [
   data: readFileSync(join(fontDir, file))
 }))
 
-const teal = '#14b8a6'
-
 export function ogImage({ title, footer }: { title: string; footer: string }) {
   return new ImageResponse(
     <div
@@ -35,13 +34,7 @@ export function ogImage({ title, footer }: { title: string; footer: string }) {
         fontFamily: 'Inter'
       }}
     >
-      <svg viewBox="65 194.98 72.95 80.04" width="72" height="79">
-        <path
-          fill={teal}
-          fillRule="evenodd"
-          d="M113.28181,194.98158l-9.44388,37.42136h34.116l-49.4623,42.61549l9.44388,-37.89355h-32.93551zM104.90037,208.4391l-27.38724,23.96384h21.36677zM125.2047,237.12487h-22.54725l-6.02047,24.67213z"
-        />
-      </svg>
+      <LogoMark width={96} />
       <div
         style={{
           display: 'flex',
@@ -55,7 +48,7 @@ export function ogImage({ title, footer }: { title: string; footer: string }) {
         {title}
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 28 }}>
-        <span style={{ color: teal, fontWeight: 700 }}>vynci.dev</span>
+        <span style={{ color: logoColor, fontWeight: 700 }}>vynci.dev</span>
         <span style={{ color: '#a1a1aa' }}>{footer}</span>
       </div>
     </div>,
