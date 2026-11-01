@@ -49,7 +49,7 @@ export function TableOfContents({ headings }: { headings: Heading[] }) {
               heading.depth === 3 ? 'pl-[0.7rem]' : 'pl-[0.35rem]',
               active === heading.id
                 ? '-ml-0.5 border-l-2 font-medium text-slate-900 dark:text-slate-100'
-                : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-600 dark:hover:text-zinc-100'
+                : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100'
             )}
           >
             <a href={`#${heading.id}`}>{heading.text}</a>

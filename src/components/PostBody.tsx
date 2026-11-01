@@ -11,7 +11,9 @@ export function PostBody({ hast }: { hast: Root }) {
 
   const components: Partial<Components> = {
     img: (props) => <PostImage {...props} eager={props.src === lcpImage} />,
-    video: PostVideo
+    video: PostVideo,
+    // Code blocks scroll sideways: make them focusable so the keyboard can scroll them
+    pre: (props) => <pre {...props} tabIndex={0} />
   }
 
   return toJsxRuntime(hast, { Fragment, jsx, jsxs, components })

@@ -50,8 +50,8 @@ const config = {
         css: {
           '--tw-prose-body': theme('colors.zinc.600'),
           '--tw-prose-headings': theme('colors.zinc.900'),
-          '--tw-prose-links': theme('colors.teal.500'),
-          '--tw-prose-links-hover': theme('colors.teal.600'),
+          '--tw-prose-links': theme('colors.teal.700'),
+          '--tw-prose-links-hover': theme('colors.teal.800'),
           '--tw-prose-underline': theme('colors.teal.500 / 0.2'),
           '--tw-prose-underline-hover': theme('colors.teal.500'),
           '--tw-prose-bold': theme('colors.zinc.900'),

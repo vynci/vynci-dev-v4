@@ -53,7 +53,7 @@ export default async function PostPage({ params }: PageProps<'/posts/[slug]'>) {
                 <span className="font-medium text-zinc-500 dark:text-zinc-400">
                   {post.authorName}
                 </span>
-                <span className="text-zinc-400 dark:text-zinc-500">{post.authorPosition}</span>
+                <span className="text-zinc-500 dark:text-zinc-400">{post.authorPosition}</span>
               </span>
             </Link>
             <PostDate post={post} decorate collapsed className="text-sm sm:text-base" />
