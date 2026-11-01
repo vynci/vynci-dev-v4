@@ -1,7 +1,6 @@
 import { BackButton } from '@/components/BackButton'
 import { Footer } from '@/components/Footer'
 import { JsonLd } from '@/components/JsonLd'
-import { WhoAmI } from '@/components/WhoAmI'
 import { aboutJsonLd, pageMetadata } from '@/lib/seo'
 import * as site from '@/lib/site'
 
@@ -22,7 +21,6 @@ export default function About() {
       <div className="mt-6 flex grow flex-col gap-8 pb-2">
         <section className="w-full">
           <h1 className="sr-only">About {site.name}</h1>
-          <WhoAmI />
 
           <p className="mb-8">
             Greetings! I&apos;m {site.name}, presently immersed in the dynamic fields of software

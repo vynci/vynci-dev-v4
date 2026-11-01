@@ -88,16 +88,6 @@
   transition: none !important;
 }
 
-.blink {
-  animation: blink-animation 1s steps(2, start) infinite;
-}
-
-@keyframes blink-animation {
-  to {
-    visibility: hidden;
-  }
-}
-
 /* Prism token colors for code blocks */
 pre[class*='language-'] {
   color: var(--color-ink-100);
