@@ -106,6 +106,16 @@ for (const url of urls) {
 }
 await Promise.all(urls.map(checkPage))
 
+// Stylesheet: guards against a deploy serving CSS compiled from an older globals.css
+const home = await (await fetch(`${base}/`)).text()
+const stylesheets = [...home.matchAll(/href="([^"]+\.css)"/g)].map((match) => match[1])
+const css = (
+  await Promise.all(stylesheets.map(async (href) => (await fetch(base + href)).text()))
+).join('')
+for (const marker of ['--color-brand-700:', '.bg-brand-700', '.text-ink-500']) {
+  if (!css.includes(marker)) fail('stylesheet', `missing ${marker} (stale CSS?)`)
+}
+
 // robots.txt
 const robots = await (await fetch(`${base}/robots.txt`)).text()
 if (!robots.includes(`Sitemap: ${canonicalOrigin}/sitemap.xml`)) {

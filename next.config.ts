@@ -3,6 +3,12 @@ import type { NextConfig } from 'next'
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
+  experimental: {
+    // Off: Vercel restores .next/cache between deploys, and a restored Turbopack cache
+    // served a stylesheet compiled from an older globals.css (missing the brand palette).
+    // A cold build of this site takes seconds.
+    turbopackFileSystemCacheForBuild: false
+  },
   env: {
     // Footer copyright year
     BUILD_YEAR: String(new Date().getFullYear())
