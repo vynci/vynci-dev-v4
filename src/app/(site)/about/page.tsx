@@ -32,7 +32,7 @@ export default function About() {
             the cutting-edge field of IoT development.
           </p>
 
-          <h2 className="text-sm font-medium text-zinc-500 sm:text-base dark:text-zinc-400">
+          <h2 className="text-sm font-medium text-ink-500 sm:text-base dark:text-ink-400">
             Get in touch
           </h2>
           <div className="mt-8">

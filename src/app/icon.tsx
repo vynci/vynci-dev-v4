@@ -1,5 +1,6 @@
 import { ImageResponse } from 'next/og'
 import { LogoMark } from '@/components/LogoMark'
+import { brand } from '@/lib/palette'
 
 export const size = { width: 64, height: 64 }
 export const contentType = 'image/png'
@@ -16,7 +17,7 @@ export default function Icon() {
         justifyContent: 'center'
       }}
     >
-      <LogoMark width={64} />
+      <LogoMark width={64} color={brand[600]} />
     </div>,
     size
   )

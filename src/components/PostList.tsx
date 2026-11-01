@@ -23,20 +23,23 @@ function PostPreview({ post }: { post: PostSummary }) {
   return (
     <div className="group relative flex flex-col items-start">
       <PostDate post={post} collapsed decorate className="md:hidden" />
-      <h2 className="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
-        <span className="absolute -inset-x-4 -inset-y-6 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 sm:-inset-x-6 sm:rounded-2xl dark:bg-zinc-800/50" />
+      <h2 className="text-base font-semibold tracking-tight text-ink-800 dark:text-ink-100">
+        <span className="absolute -inset-x-4 -inset-y-6 z-0 scale-95 bg-ink-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 sm:-inset-x-6 sm:rounded-2xl dark:bg-ink-800/50" />
         <Link href={`/posts/${post.slug}`}>
           <span className="absolute -inset-x-4 -inset-y-6 z-20 sm:-inset-x-6 sm:rounded-2xl" />
           <span className="relative z-10">{post.title}</span>
         </Link>
       </h2>
-      <div className="relative z-10 mt-2 flex-1 text-sm text-zinc-600 dark:text-zinc-400">
+      <div className="relative z-10 mt-2 flex-1 text-sm text-ink-600 dark:text-ink-400">
         <div
           className="prose dark:prose-invert [&>p]:my-0"
           dangerouslySetInnerHTML={{ __html: post.excerptHtml }}
         />
       </div>
-      <div aria-hidden="true" className="relative z-10 mt-4 flex items-center text-teal-600">
+      <div
+        aria-hidden="true"
+        className="relative z-10 mt-4 flex items-center text-brand-700 dark:text-brand-400"
+      >
         <span className="text-sm font-medium">Read</span>
         <ArrowRightIcon className="ml-1 h-4 w-4" />
       </div>

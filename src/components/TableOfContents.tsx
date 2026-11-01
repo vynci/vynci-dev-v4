@@ -45,11 +45,11 @@ export function TableOfContents({ headings }: { headings: Heading[] }) {
           <li
             key={heading.id}
             className={clsx(
-              'border-teal-500 transition-colors',
+              'border-brand-600 transition-colors dark:border-brand-400',
               heading.depth === 3 ? 'pl-[0.7rem]' : 'pl-[0.35rem]',
               active === heading.id
-                ? '-ml-0.5 border-l-2 font-medium text-slate-900 dark:text-slate-100'
-                : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100'
+                ? '-ml-0.5 border-l-2 font-medium text-ink-900 dark:text-ink-100'
+                : 'text-ink-500 hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-100'
             )}
           >
             <a href={`#${heading.id}`}>{heading.text}</a>

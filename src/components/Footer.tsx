@@ -14,7 +14,7 @@ export function Footer({ href = '/about' }: { href?: string }) {
         <div className="flex justify-center gap-6">
           <SocialLinks />
         </div>
-        <div className="flex justify-center text-center text-sm text-zinc-500 dark:text-zinc-400">
+        <div className="flex justify-center text-center text-sm text-ink-500 dark:text-ink-400">
           <Link href={href}>
             © Copyright {year} {site.name}
           </Link>

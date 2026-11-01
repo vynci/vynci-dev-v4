@@ -27,14 +27,14 @@ export function PostDate({
   return (
     <div
       className={clsx(
-        'relative z-10 order-first mb-3 flex text-zinc-500 dark:text-zinc-400',
+        'relative z-10 order-first mb-3 flex text-ink-500 dark:text-ink-400',
         decorate && 'pl-3.5',
         className
       )}
     >
       {decorate && (
         <span className="absolute inset-y-0 left-0 flex items-center py-1" aria-hidden="true">
-          <span className="h-full w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500" />
+          <span className="h-full w-0.5 rounded-full bg-ink-200 dark:bg-ink-500" />
         </span>
       )}
       <div className={clsx('flex', !collapsed && 'flex-col')}>

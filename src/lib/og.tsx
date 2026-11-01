@@ -3,7 +3,8 @@
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { ImageResponse } from 'next/og'
-import { LogoMark, logoColor } from '@/components/LogoMark'
+import { LogoMark } from '@/components/LogoMark'
+import { brand, ink } from './palette'
 
 export const ogSize = { width: 1200, height: 630 }
 export const ogContentType = 'image/png'
@@ -30,11 +31,11 @@ export function ogImage({ title, footer }: { title: string; footer: string }) {
         flexDirection: 'column',
         justifyContent: 'space-between',
         padding: '72px 80px',
-        background: '#18181b',
+        backgroundImage: `linear-gradient(135deg, ${brand[950]} 0%, ${ink[950]} 100%)`,
         fontFamily: 'Inter'
       }}
     >
-      <LogoMark width={96} />
+      <LogoMark width={96} color={brand[400]} />
       <div
         style={{
           display: 'flex',
@@ -42,14 +43,14 @@ export function ogImage({ title, footer }: { title: string; footer: string }) {
           fontWeight: 700,
           lineHeight: 1.15,
           letterSpacing: '-0.02em',
-          color: '#f4f4f5'
+          color: ink[100]
         }}
       >
         {title}
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 28 }}>
-        <span style={{ color: logoColor, fontWeight: 700 }}>vynci.dev</span>
-        <span style={{ color: '#a1a1aa' }}>{footer}</span>
+        <span style={{ color: brand[400], fontWeight: 700 }}>vynci.dev</span>
+        <span style={{ color: brand[200] }}>{footer}</span>
       </div>
     </div>,
     { ...ogSize, fonts }

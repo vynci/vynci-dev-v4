@@ -38,7 +38,7 @@ export default async function PostPage({ params }: PageProps<'/posts/[slug]'>) {
       <div className="mx-auto w-full overflow-x-hidden">
         <article>
           <header className="flex flex-col">
-            <h1 className="mt-6 text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
+            <h1 className="mt-6 text-4xl font-bold tracking-tight text-ink-800 sm:text-5xl dark:text-ink-100">
               {post.title}
             </h1>
             <Link href="/about" className="mt-8 flex w-fit">
@@ -50,10 +50,10 @@ export default async function PostPage({ params }: PageProps<'/posts/[slug]'>) {
                 className="mr-4 h-11 w-11 rounded-full"
               />
               <span className="grid pt-1 text-sm leading-4">
-                <span className="font-medium text-zinc-500 dark:text-zinc-400">
+                <span className="font-medium text-ink-500 dark:text-ink-400">
                   {post.authorName}
                 </span>
-                <span className="text-zinc-500 dark:text-zinc-400">{post.authorPosition}</span>
+                <span className="text-ink-500 dark:text-ink-400">{post.authorPosition}</span>
               </span>
             </Link>
             <PostDate post={post} decorate collapsed className="text-sm sm:text-base" />

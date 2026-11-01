@@ -1,7 +1,8 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Suspense } from 'react'
 import { NavigationTracker } from '@/components/BackButton'
 import { Header } from '@/components/Header'
+import { ink } from '@/lib/palette'
 import * as site from '@/lib/site'
 import './globals.css'
 
@@ -18,6 +19,14 @@ export const metadata: Metadata = {
   authors: [{ name: site.name, url: `${site.url}/about` }],
   creator: site.name,
   robots: { index: true, follow: true }
+}
+
+// Browser UI color (mobile address bar) for each theme
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: ink[900] }
+  ]
 }
 
 // Runs before first paint. Same behavior and localStorage key (`isDarkMode`) as the
@@ -51,7 +60,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="h-full bg-white text-zinc-600 dark:bg-zinc-900 dark:text-zinc-400">
+      <body className="h-full bg-white text-ink-600 dark:bg-ink-900 dark:text-ink-400">
         <div className="flex min-h-screen flex-col">
           <div className="flex w-full grow flex-col px-4 py-2">
             <Header />

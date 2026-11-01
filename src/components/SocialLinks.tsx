@@ -1,7 +1,7 @@
 import * as site from '@/lib/site'
 
 const iconClass =
-  'h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300'
+  'h-6 w-6 fill-ink-500 transition group-hover:fill-ink-600 dark:fill-ink-400 dark:group-hover:fill-ink-300'
 
 const links = [
   site.github && {

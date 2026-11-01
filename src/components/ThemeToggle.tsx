@@ -36,8 +36,8 @@ export function ThemeToggle() {
       className="h-5 w-5 sm:h-8 sm:w-8 sm:p-1"
       onClick={toggle}
     >
-      <MoonIcon className="hidden text-zinc-500 dark:block" />
-      <SunIcon className="block text-zinc-400 dark:hidden" />
+      <MoonIcon className="hidden text-ink-500 dark:block" />
+      <SunIcon className="block text-ink-400 dark:hidden" />
     </button>
   )
 }

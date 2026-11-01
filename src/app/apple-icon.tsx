@@ -1,10 +1,11 @@
 import { ImageResponse } from 'next/og'
 import { LogoMark } from '@/components/LogoMark'
+import { brand } from '@/lib/palette'
 
 export const size = { width: 180, height: 180 }
 export const contentType = 'image/png'
 
-// iOS home screen icon: opaque background with padding, as iOS expects
+// iOS home screen icon: the mark in white on an opaque brand tile, as iOS expects
 export default function AppleIcon() {
   return new ImageResponse(
     <div
@@ -14,10 +15,10 @@ export default function AppleIcon() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#ffffff'
+        background: brand[700]
       }}
     >
-      <LogoMark width={132} />
+      <LogoMark width={124} color="#ffffff" />
     </div>,
     size
   )

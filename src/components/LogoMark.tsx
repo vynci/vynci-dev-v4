@@ -1,13 +1,22 @@
 // The vynci.dev mark. Plain SVG elements, so it renders both in pages and in next/og cards.
-export const logoColor = '#0ea47a'
+// Filled with currentColor by default: set the color with a text-* class or `color`.
 export const logoAspectRatio = 100 / 86.888
 
-export function LogoMark({ width, color = logoColor }: { width: number; color?: string }) {
+export function LogoMark({
+  width,
+  color = 'currentColor',
+  className
+}: {
+  width: number
+  color?: string
+  className?: string
+}) {
   return (
     <svg
       viewBox="0 0 100 86.888"
       width={width}
       height={Math.round(width / logoAspectRatio)}
+      className={className}
       aria-hidden="true"
     >
       <g transform="translate(-0.0668 -6.6222) scale(1.1126)" fill={color}>
