@@ -5,3 +5,5 @@ posts
 infra/cdk.out
 .media-out
 media-manifest.json
+test-results
+playwright-report

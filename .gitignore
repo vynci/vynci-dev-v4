@@ -31,3 +31,7 @@ next-env.d.ts
 /posts/**/*.svg
 /posts/**/*.mp4
 /posts/**/*.webm
+
+# playwright
+/test-results/
+/playwright-report/

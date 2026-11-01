@@ -35,10 +35,12 @@
   hr {
     @apply border-zinc-100 dark:border-zinc-700/25;
   }
+}
 
-  img {
-    border-radius: 0 !important;
-  }
+/* Square images in posts (the typography config rounds them). Unlayered, so it wins over
+   the plugin's layered styles without !important, and the avatar can still be round. */
+.prose img {
+  border-radius: 0;
 }
 
 /* Set for one tick while the theme changes, so colors switch without animating */

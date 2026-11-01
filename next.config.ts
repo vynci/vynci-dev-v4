@@ -3,6 +3,10 @@ import type { NextConfig } from 'next'
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
+  env: {
+    // Footer copyright year
+    BUILD_YEAR: String(new Date().getFullYear())
+  },
   images: {
     // Post media CDN (see src/lib/media.ts)
     remotePatterns: [

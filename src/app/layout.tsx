@@ -1,4 +1,7 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
+import { NavigationTracker } from '@/components/BackButton'
+import { Header } from '@/components/Header'
 import * as site from '@/lib/site'
 import './globals.css'
 
@@ -43,7 +46,16 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="h-full bg-white text-zinc-600 dark:bg-zinc-900 dark:text-zinc-400">
-        {children}
+        <div className="flex min-h-screen flex-col">
+          <div className="flex w-full grow flex-col px-4 py-2">
+            <Header />
+            <main className="mx-auto flex w-full grow flex-col">{children}</main>
+          </div>
+        </div>
+        {/* Reads the pathname, which is unknown while prerendering a dynamic route's shell */}
+        <Suspense>
+          <NavigationTracker />
+        </Suspense>
       </body>
     </html>
   )
