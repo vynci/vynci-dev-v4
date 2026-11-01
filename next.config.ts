@@ -9,10 +9,7 @@ const nextConfig: NextConfig = {
   },
   images: {
     // Post media CDN (see src/lib/media.ts)
-    remotePatterns: [
-      new URL('https://media.vynci.dev/posts/**'),
-      new URL('https://d203yvyxkx65mq.cloudfront.net/posts/**')
-    ]
+    remotePatterns: [new URL('https://media.vynci.dev/posts/**')]
   },
   // Post pages read Markdown at runtime for slugs not prerendered (they 404)
   outputFileTracingIncludes: {

@@ -1,6 +1,6 @@
 {
   "app": "node bin/app.ts",
   "context": {
-    "vynci:attachDomain": false
+    "vynci:attachDomain": true
   }
 }

@@ -2,8 +2,7 @@
 // scripts/media-sync.ts writes media-manifest.json; the site reads only the manifest.
 // See plans/vynci-dev-to-nextjs/PLAN.md, section 7a.
 
-// TODO: switch to https://media.vynci.dev once its certificate is issued and attached
-export const mediaOrigin = 'https://d203yvyxkx65mq.cloudfront.net'
+export const mediaOrigin = 'https://media.vynci.dev'
 
 export const imageTypes: Record<string, string> = {
   png: 'image/png',
