@@ -1,5 +1,3 @@
 node_modules
-public
-dist
-.vercel_build_output
-.svelte-kit
+.next
+.media-out

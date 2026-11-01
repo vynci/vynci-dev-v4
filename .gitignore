@@ -1,6 +1,18 @@
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+next-env.d.ts
+*.tsbuildinfo
+
+# media: binaries live in S3 (see plans/vynci-dev-to-nextjs, section 7a)
+/public/media/
+/.media-out/
+
+# misc
 .DS_Store
-node_modules
-.svelte-kit
+*.pem
+.env*
 .vercel
-/build
-/public

@@ -1,0 +1,106 @@
+@import 'tailwindcss';
+@config '../../tailwind.config.mjs';
+
+/* Dark mode follows the `dark` class on <html>, set by the inline theme script in layout.tsx */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  /* Tailwind v3 defaults that v4 changed, kept so the site renders as before */
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+
+  body {
+    @apply text-zinc-600 dark:text-zinc-400;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-zinc-900 dark:text-zinc-200;
+  }
+
+  hr {
+    @apply border-zinc-100 dark:border-zinc-700/25;
+  }
+
+  img {
+    border-radius: 0 !important;
+  }
+}
+
+/* Set for one tick while the theme changes, so colors switch without animating */
+.no-transitions * {
+  transition: none !important;
+}
+
+.blink {
+  animation: blink-animation 1s steps(2, start) infinite;
+}
+
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* Prism token colors for code blocks */
+pre[class*='language-'] {
+  color: var(--color-zinc-100);
+}
+
+.token.tag,
+.token.class-name,
+.token.selector,
+.token.selector .class,
+.token.selector.class,
+.token.function {
+  color: var(--color-pink-400);
+}
+
+.token.attr-name,
+.token.keyword,
+.token.rule,
+.token.pseudo-class,
+.token.important {
+  color: var(--color-zinc-300);
+}
+
+.token.module {
+  color: var(--color-pink-400);
+}
+
+.token.attr-value,
+.token.class,
+.token.string,
+.token.property {
+  color: var(--color-teal-300);
+}
+
+.token.punctuation,
+.token.attr-equals {
+  color: var(--color-zinc-500);
+}
+
+.token.unit,
+.language-css .token.function {
+  color: var(--color-sky-200);
+}
+
+.token.comment,
+.token.operator,
+.token.combinator {
+  color: var(--color-zinc-400);
+}
