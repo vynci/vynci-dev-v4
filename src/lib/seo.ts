@@ -76,7 +76,8 @@ const person = {
   name: site.name,
   url: absoluteUrl('/about'),
   image: absoluteUrl(site.avatar),
-  jobTitle: 'Software and hardware engineer',
+  jobTitle: 'Engineer, AI, IoT and cloud infrastructure',
+  knowsAbout: ['Artificial intelligence', 'Internet of things', 'Cloud infrastructure'],
   sameAs: [`https://github.com/${site.github}`, `https://www.linkedin.com/${site.linkedin}`]
 }
 
