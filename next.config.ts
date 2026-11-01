@@ -16,7 +16,15 @@ const nextConfig: NextConfig = {
   },
   // Post pages read Markdown at runtime for slugs not prerendered (they 404)
   outputFileTracingIncludes: {
-    '/posts/[slug]': ['./posts/**/*.md']
+    '/posts/[slug]': ['./posts/**/*.md'],
+    '/posts/[slug]/opengraph-image': ['./posts/**/*.md', './src/assets/fonts/*']
+  },
+  async redirects() {
+    return [
+      // The SvelteKit sitemap listed every post under /post/ (a 404); search engines may have it
+      { source: '/post/:slug', destination: '/posts/:slug', permanent: true },
+      { source: '/posts', destination: '/', permanent: true }
+    ]
   },
   turbopack: {
     rules: {

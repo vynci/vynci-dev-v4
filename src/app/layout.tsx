@@ -8,10 +8,17 @@ import './globals.css'
 // Every route must be fully prerendered at build time; the build fails otherwise.
 export const ensureStatic = 'navigation'
 
+// Defaults only. Pages set canonical, Open Graph and Twitter fields through pageMetadata()
+// (src/lib/seo.ts): metadata merges shallowly, so defaults here would leak into every page.
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: { default: site.title, template: `%s | ${site.name}` },
-  description: site.description
+  description: site.description,
+  applicationName: 'vynci.dev',
+  authors: [{ name: site.name, url: `${site.url}/about` }],
+  creator: site.name,
+  icons: { icon: '/favicon.png' },
+  robots: { index: true, follow: true }
 }
 
 // Runs before first paint. Same behavior and localStorage key (`isDarkMode`) as the

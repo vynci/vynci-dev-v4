@@ -1,17 +1,20 @@
-import type { Metadata } from 'next'
 import { BackButton } from '@/components/BackButton'
 import { Footer } from '@/components/Footer'
+import { JsonLd } from '@/components/JsonLd'
 import { WhoAmI } from '@/components/WhoAmI'
+import { aboutJsonLd, pageMetadata } from '@/lib/seo'
 import * as site from '@/lib/site'
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: '/about',
   title: 'About',
   description: `${site.name} is a software and hardware engineer in Toronto, working on cloud architecture, serverless, web and mobile apps, and IoT.`
-}
+})
 
 export default function About() {
   return (
     <>
+      <JsonLd data={aboutJsonLd()} />
       <div className="mt-6 mb-2 hidden lg:block">
         <BackButton />
       </div>

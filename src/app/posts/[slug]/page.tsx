@@ -7,7 +7,9 @@ import { Footer } from '@/components/Footer'
 import { PostBody } from '@/components/PostBody'
 import { PostDate } from '@/components/PostDate'
 import { TableOfContents } from '@/components/TableOfContents'
+import { JsonLd } from '@/components/JsonLd'
 import { getAllPosts, getPost } from '@/lib/posts'
+import { postJsonLd, postMetadata } from '@/lib/seo'
 import * as site from '@/lib/site'
 
 export function generateStaticParams() {
@@ -16,8 +18,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps<'/posts/[slug]'>): Promise<Metadata> {
   const post = getPost((await params).slug)
-  if (!post) return {}
-  return { title: post.title, description: post.description }
+  return post ? postMetadata(post) : {}
 }
 
 // Three columns on large screens: back button | article (42rem) | table of contents
@@ -27,6 +28,7 @@ export default async function PostPage({ params }: PageProps<'/posts/[slug]'>) {
 
   return (
     <div className="mx-auto mt-6 grid w-full max-w-2xl grid-cols-1 lg:max-w-none lg:grid-cols-[1fr_42rem_1fr]">
+      <JsonLd data={postJsonLd(post)} />
       <div className="hidden pt-8 lg:block">
         <div className="sticky top-0 flex w-full justify-end pt-11 pr-8">
           <BackButton />
