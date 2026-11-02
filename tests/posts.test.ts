@@ -34,8 +34,10 @@ function headingIds(hast: Root) {
 }
 
 describe('posts', () => {
-  it('loads every post with the same slugs as production, newest first', () => {
-    expect(posts.map((post) => post.slug).sort()).toEqual(Object.keys(fixtures).sort())
+  it('loads every production post (new posts are allowed), newest first', () => {
+    const slugs = posts.map((post) => post.slug)
+    for (const slug of Object.keys(fixtures)) expect(slugs).toContain(slug)
+    expect(new Set(slugs).size).toBe(slugs.length)
     const dates = posts.map((post) => post.date)
     expect(dates).toEqual([...dates].sort().reverse())
   })
