@@ -25,6 +25,59 @@
       "width": 2880,
       "height": 1682
     },
+    "posts/harnesswalk-seeing-inside-an-ai-agent-harness/step-mode.mp4": {
+      "key": "posts/harnesswalk-seeing-inside-an-ai-agent-harness/step-mode.5964da5ccf.mp4",
+      "sha256": "5964da5ccf1cc28d0e29152b56558b17e38e3c55d6e68c50cb2caf6faf4ee49d",
+      "bytes": 6434941,
+      "contentType": "video/mp4",
+      "width": 1440,
+      "height": 900,
+      "poster": {
+        "key": "posts/harnesswalk-seeing-inside-an-ai-agent-harness/step-mode.poster.2be9b00eea.jpg",
+        "bytes": 108363,
+        "contentType": "image/jpeg",
+        "width": 1440,
+        "height": 900
+      }
+    },
+    "posts/harnesswalk-seeing-inside-an-ai-agent-harness/turn-done.png": {
+      "key": "posts/harnesswalk-seeing-inside-an-ai-agent-harness/turn-done.b03377f879.png",
+      "sha256": "b03377f8792c2e3870681906601a9509e293df7c2e1c6bcfceed4cb2f6b3467a",
+      "bytes": 409168,
+      "contentType": "image/png",
+      "width": 2880,
+      "height": 1800
+    },
+    "posts/harnesswalk-seeing-inside-an-ai-agent-harness/walk.mp4": {
+      "key": "posts/harnesswalk-seeing-inside-an-ai-agent-harness/walk.194e7de75a.mp4",
+      "sha256": "194e7de75a12e6894440d40a2d09824684c99f5e0c64dd1dee44f16237828716",
+      "bytes": 2855252,
+      "contentType": "video/mp4",
+      "width": 1440,
+      "height": 900,
+      "poster": {
+        "key": "posts/harnesswalk-seeing-inside-an-ai-agent-harness/walk.poster.e7e6fc75d7.jpg",
+        "bytes": 108530,
+        "contentType": "image/jpeg",
+        "width": 1440,
+        "height": 900
+      }
+    },
+    "posts/harnesswalk-seeing-inside-an-ai-agent-harness/your-own-agent.mp4": {
+      "key": "posts/harnesswalk-seeing-inside-an-ai-agent-harness/your-own-agent.90ac74cf59.mp4",
+      "sha256": "90ac74cf59b257e26a057129376da21aea970e38bb7fd1224a49f4d3e4cc53df",
+      "bytes": 7717748,
+      "contentType": "video/mp4",
+      "width": 1440,
+      "height": 900,
+      "poster": {
+        "key": "posts/harnesswalk-seeing-inside-an-ai-agent-harness/your-own-agent.poster.d9b434f842.jpg",
+        "bytes": 108347,
+        "contentType": "image/jpeg",
+        "width": 1440,
+        "height": 900
+      }
+    },
     "posts/iot-mobile-controlled-relays-through-esp8266-via-mqtt/circuit_diagram.png": {
       "key": "posts/iot-mobile-controlled-relays-through-esp8266-via-mqtt/circuit_diagram.605896d598.png",
       "sha256": "605896d59818d91393bb6e5606f41baca8e69e6b03a09e2c395662fcfde86173",

@@ -5,7 +5,6 @@ authorName: 'Vince Elizaga'
 authorPosition: 'Admin'
 description: 'Why I built an interactive reference implementation of an AI agent harness, how I hope developers will use it, and how to turn what you learn into an agent of your own.'
 tags: ['ai', 'agents', 'open-source']
-draft: true
 ---
 
 ## Overview
