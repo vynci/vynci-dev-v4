@@ -8,7 +8,7 @@ import * as site from '@/lib/site'
 export const metadata = pageMetadata({
   path: '/about',
   title: 'About',
-  description: `${site.name} is an engineer in Toronto focused on AI, IoT and cloud infrastructure, building xorgate and alocate at Epye Labs and Harnesswalk, an open-source AI agent harness you can watch run.`
+  description: `${site.name} is an engineer in Toronto focused on AI, IoT and cloud infrastructure, building xorgate and alocate at Epye Labs.`
 })
 
 function ExternalLink({ href, children }: { href: string; children: ReactNode }) {
@@ -76,14 +76,6 @@ export default function About() {
             over-revving. We&apos;re also experimenting with detecting tailgating using object
             detection and depth estimation to measure the distance between vehicles from a
             road-facing camera.
-          </p>
-          <p className="mt-4">
-            On my own, I&apos;m building{' '}
-            <ExternalLink href="https://harnesswalk.vynci.dev">Harnesswalk</ExternalLink>, an
-            open-source, interactive reference implementation of an AI agent harness. Send a
-            message and watch it move through guardrails, context building, memory, policy, tools
-            and evals on a live diagram. Click any node to read its code and the exact payload it
-            saw, pause at every step, or switch a node off to see what breaks without it.
           </p>
 
           <SectionTitle>Where I&apos;ve been</SectionTitle>
