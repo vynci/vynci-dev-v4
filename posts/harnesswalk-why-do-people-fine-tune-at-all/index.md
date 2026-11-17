@@ -11,7 +11,7 @@ tags: ['ai', 'agents', 'fine-tuning', 'open-source']
 
 The [first post](/posts/harnesswalk-seeing-inside-an-ai-agent-harness) was about seeing inside an agent harness: the guardrails, context, memory, policy and approvals that sit around a model. This one is about the part I had treated as fixed. The model.
 
-Hosted models keep getting better and cheaper, and a good prompt covers a lot. So why do people still fine-tune? I wanted an answer I had measured, not one I had read. I added a tuning loop to [Harnesswalk](https://github.com/vynci/harnesswalk), pointed it at two RTX 3090s in my homelab, and trained a small open-weight model, Qwen3.5 4B, on one specific failure.
+Hosted models keep getting better and cheaper, and a good prompt covers a lot. So why do people still fine-tune? I wanted an answer I had measured, not one I had read. I added a tuning loop to [Harnesswalk](https://github.com/vynci/harnesswalk), pointed it at two RTX 3090s in my AI Homelab Server, and trained a small open-weight model, Qwen3.5 4B, on one specific failure.
 
 The short version: on 979 test cases, the 4B went from passing 41% to about 91%. Claude Haiku 5.5, the hosted model whose answers I trained it on, passes 80% of the same cases. The training data cost less than a dollar and the training took three hours on one card. It is also a narrower win than that sentence sounds, and the second half of this post is about where it stops.
 
@@ -39,7 +39,7 @@ When I asked around, the reasons people gave for fine-tuning came down to three.
 
 ## The setup
 
-The homelab is one box: two RTX 3090s (24 GB each), a Ryzen 9 9950X, Ubuntu. Ollama serves models from the first card. The second card is free for training.
+The Homelab Server is one box: two RTX 3090s (24 GB each), a Ryzen 9 9950X, Ubuntu. Ollama serves models from the first card. The second card is free for training.
 
 The tuning loop is two new nodes on the same diagram, Curate and Tune, plus a gate and a canary in front of real traffic:
 
@@ -85,7 +85,7 @@ On speed, the tuned 4B decodes at the same 155 tokens per second as the base. A 
 
 ![Test cases passed against seconds per answer](./pareto.svg)
 
-That chart is the third reason made concrete. On these tasks the best point I have is a model that runs on a card in my house, and it did not exist before I trained it.
+That chart is the third reason made concrete. On these tasks the best point I have is a model that runs on a card in my home, and it did not exist before I trained it.
 
 ## How much data does it take?
 
@@ -153,7 +153,7 @@ The seeds also showed a regression I would have missed. On a two-step logistics 
 
 ## So why do people fine-tune?
 
-After this, my answer is that fine-tuning is how you teach a small model the habits of your system. It did not make the model smarter in general, and the golden cases show that. It made it behave correctly inside my harness, on the tasks I trained it for, more reliably than the hosted model that taught it, at about half the response time, on a card in my house, as a file I own.
+After this, my answer is that fine-tuning is how you teach a small model the habits of your system. It did not make the model smarter in general, and the golden cases show that. It made it behave correctly inside my harness, on the tasks I trained it for, more reliably than the hosted model that taught it, at about half the response time, on a card in my home, as a file I own.
 
 The other thing I learned is that the harness matters more than the training script. Grading the teacher's answers before they become training data is the reason the student passed the teacher. A test set large enough to trust, a held-out pack, seeds, a gate against the base, a rollback: without those I would have shipped the first adapter and believed the first number. All of it is in the repository, with the raw data of this round in [docs/tuning](https://github.com/vynci/harnesswalk/tree/main/docs/tuning) and the write-up in [docs/tuning.md](https://github.com/vynci/harnesswalk/blob/main/docs/tuning.md).
 
