@@ -41,6 +41,8 @@ When I asked around, the reasons people gave for fine-tuning came down to three.
 
 The Homelab Server is one box: two RTX 3090s (24 GB each), a Ryzen 9 9950X, Ubuntu. Ollama serves models from the first card. The second card is free for training.
 
+![The homelab server: two RTX 3090s on an open frame](./homelab-rig.jpg)
+
 The tuning loop is two new nodes on the same diagram, Curate and Tune, plus a gate and a canary in front of real traffic:
 
 1. **Curate.** A teacher model answers thousands of generated scenarios inside the harness. Only the answers that pass the same grading as the test cases are kept. The teacher here was Claude Haiku 5.5: it answered 11,422 scenarios in a little over two hours, 95% were kept, and the bill was about 8 USD.
