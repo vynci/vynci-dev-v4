@@ -78,6 +78,123 @@
         "height": 900
       }
     },
+    "posts/harnesswalk-why-do-people-fine-tune-at-all/base-vs-tuned.mp4": {
+      "key": "posts/harnesswalk-why-do-people-fine-tune-at-all/base-vs-tuned.eee91730a3.mp4",
+      "sha256": "eee91730a3601d14c832e244ec5bc37ef724179d9d88f0b50fb847325ae9d081",
+      "bytes": 5091514,
+      "contentType": "video/mp4",
+      "width": 1280,
+      "height": 720,
+      "poster": {
+        "key": "posts/harnesswalk-why-do-people-fine-tune-at-all/base-vs-tuned.poster.583b8805a1.jpg",
+        "bytes": 127809,
+        "contentType": "image/jpeg",
+        "width": 1280,
+        "height": 720
+      }
+    },
+    "posts/harnesswalk-why-do-people-fine-tune-at-all/curve.svg": {
+      "key": "posts/harnesswalk-why-do-people-fine-tune-at-all/curve.c4a7404bc3.svg",
+      "sha256": "c4a7404bc33e4cba6a13bc69970099ee6d40a39455499cfbeb8dfea1308c76eb",
+      "bytes": 1904,
+      "contentType": "image/svg+xml",
+      "width": 900,
+      "height": 422
+    },
+    "posts/harnesswalk-why-do-people-fine-tune-at-all/golden.svg": {
+      "key": "posts/harnesswalk-why-do-people-fine-tune-at-all/golden.9799b746b8.svg",
+      "sha256": "9799b746b805ae53f1c4ebc86092f56d04294238ec1ff4d64ef366eb3ae688db",
+      "bytes": 1891,
+      "contentType": "image/svg+xml",
+      "width": 900,
+      "height": 422
+    },
+    "posts/harnesswalk-why-do-people-fine-tune-at-all/gpu-round.svg": {
+      "key": "posts/harnesswalk-why-do-people-fine-tune-at-all/gpu-round.569ca9d98d.svg",
+      "sha256": "569ca9d98dc367675e80b7860a2af594e01d56b8a13ce6ebdf763cf0fba1d8db",
+      "bytes": 22455,
+      "contentType": "image/svg+xml",
+      "width": 900,
+      "height": 540
+    },
+    "posts/harnesswalk-why-do-people-fine-tune-at-all/gpu-timelapse.mp4": {
+      "key": "posts/harnesswalk-why-do-people-fine-tune-at-all/gpu-timelapse.53740d4a02.mp4",
+      "sha256": "53740d4a02d5424044a4690bcc4eba10d6d62b39df5c58aa50fe39a653964eea",
+      "bytes": 4109037,
+      "contentType": "video/mp4",
+      "width": 1920,
+      "height": 1080,
+      "poster": {
+        "key": "posts/harnesswalk-why-do-people-fine-tune-at-all/gpu-timelapse.poster.6e1085ed59.jpg",
+        "bytes": 239551,
+        "contentType": "image/jpeg",
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    "posts/harnesswalk-why-do-people-fine-tune-at-all/gpu-training.svg": {
+      "key": "posts/harnesswalk-why-do-people-fine-tune-at-all/gpu-training.9a1ef10d28.svg",
+      "sha256": "9a1ef10d283a3a0a98d27bb97229061362f55ae493ac3c76c4b4dc71377d7438",
+      "bytes": 11863,
+      "contentType": "image/svg+xml",
+      "width": 900,
+      "height": 500
+    },
+    "posts/harnesswalk-why-do-people-fine-tune-at-all/pareto.svg": {
+      "key": "posts/harnesswalk-why-do-people-fine-tune-at-all/pareto.5251f28802.svg",
+      "sha256": "5251f288020cd2336efb3313e34d7120e0b35589033e3bc8adadc2ed1e38e4a8",
+      "bytes": 2845,
+      "contentType": "image/svg+xml",
+      "width": 900,
+      "height": 580
+    },
+    "posts/harnesswalk-why-do-people-fine-tune-at-all/scores.svg": {
+      "key": "posts/harnesswalk-why-do-people-fine-tune-at-all/scores.7ce5256327.svg",
+      "sha256": "7ce5256327181befeb72b75838476a3a9fd0184e9912658a8ba6026d64cb2fa7",
+      "bytes": 1872,
+      "contentType": "image/svg+xml",
+      "width": 900,
+      "height": 422
+    },
+    "posts/harnesswalk-why-do-people-fine-tune-at-all/seeds.svg": {
+      "key": "posts/harnesswalk-why-do-people-fine-tune-at-all/seeds.bd7ba65d60.svg",
+      "sha256": "bd7ba65d60ebdb943b535142dcebb10c76331d2a0b09fd7064590b95d1a31543",
+      "bytes": 1591,
+      "contentType": "image/svg+xml",
+      "width": 900,
+      "height": 358
+    },
+    "posts/harnesswalk-why-do-people-fine-tune-at-all/tune-loop.mp4": {
+      "key": "posts/harnesswalk-why-do-people-fine-tune-at-all/tune-loop.28742f7a48.mp4",
+      "sha256": "28742f7a48da3d2d167b7d0a30d065a1a8b625b6c88d350db6d1686de08eda30",
+      "bytes": 3435194,
+      "contentType": "video/mp4",
+      "width": 1280,
+      "height": 720,
+      "poster": {
+        "key": "posts/harnesswalk-why-do-people-fine-tune-at-all/tune-loop.poster.c2a5d9f0f9.jpg",
+        "bytes": 101508,
+        "contentType": "image/jpeg",
+        "width": 1280,
+        "height": 720
+      }
+    },
+    "posts/harnesswalk-why-do-people-fine-tune-at-all/unseen.svg": {
+      "key": "posts/harnesswalk-why-do-people-fine-tune-at-all/unseen.b1beb62d65.svg",
+      "sha256": "b1beb62d654e374aa45bd50de63f867885f1452f020983e2d729ee109b287713",
+      "bytes": 1887,
+      "contentType": "image/svg+xml",
+      "width": 900,
+      "height": 422
+    },
+    "posts/harnesswalk-why-do-people-fine-tune-at-all/write-tool.svg": {
+      "key": "posts/harnesswalk-why-do-people-fine-tune-at-all/write-tool.c0e854271f.svg",
+      "sha256": "c0e854271f2baeee57857fbd9007db23c7a881604a7ae085dc4edffeecd1403e",
+      "bytes": 1875,
+      "contentType": "image/svg+xml",
+      "width": 900,
+      "height": 422
+    },
     "posts/iot-mobile-controlled-relays-through-esp8266-via-mqtt/circuit_diagram.png": {
       "key": "posts/iot-mobile-controlled-relays-through-esp8266-via-mqtt/circuit_diagram.605896d598.png",
       "sha256": "605896d59818d91393bb6e5606f41baca8e69e6b03a09e2c395662fcfde86173",
